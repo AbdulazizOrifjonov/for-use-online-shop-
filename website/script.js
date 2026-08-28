@@ -1,4 +1,4 @@
-// DELUX Presentation — Apple 3D Scroll Reveal, Dynamic System Monitor & Liquid Animations
+// Professional Tools Presentation — Apple 3D Scroll Reveal, Dynamic System Monitor & Liquid Animations
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -104,3 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+
+// Cursor Follower Logic
+const cursorFollower = document.querySelector(\'.cursor-follower\');
+if (cursorFollower) {
+  window.addEventListener(\'mousemove\', (e) => {
+    cursorFollower.style.transform = 	ranslate(calc(px - 50%), calc(px - 50%));
+  });
+}

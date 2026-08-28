@@ -65,12 +65,14 @@ export function ProductQA({ slug }) {
                 <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 <div>
                   <p className="text-sm font-medium">{q.question}</p>
-                  <p className="text-xs text-muted-foreground">{q.user.name}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {q.user.name ? `${q.user.name.charAt(0)}***` : 'Mijoz'}
+                  </p>
                 </div>
               </div>
               {q.answer && (
                 <div className="ml-6 mt-2 rounded-lg bg-muted p-3 text-sm">
-                  <span className="font-semibold text-primary">DELUX: </span>
+                  <span className="font-semibold text-primary">Professional Tools: </span>
                   {q.answer}
                 </div>
               )}

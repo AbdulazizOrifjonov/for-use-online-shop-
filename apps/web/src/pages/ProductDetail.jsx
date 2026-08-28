@@ -148,7 +148,7 @@ export default function ProductDetail() {
 
   return (
     <div className="pb-12">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
         <ProductGallery images={product.images} videoUrl={product.videoUrl} name={name} />
 
         <div>
@@ -259,45 +259,46 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-border bg-card shadow-sm">
-            <Tabs defaultValue="description">
-              <div className="border-b border-border px-1">
-                <TabsList className="h-14 w-full justify-start gap-2 rounded-none bg-transparent p-2 overflow-x-auto scrollbar-hide">
-                  <TabsTrigger value="description" className="relative h-10 rounded-full px-5 text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md hover:bg-primary/10 hover:text-primary">{t('product.description')}</TabsTrigger>
-                  <TabsTrigger value="specs" className="relative h-10 rounded-full px-5 text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md hover:bg-primary/10 hover:text-primary">{t('product.specifications')}</TabsTrigger>
-                  <TabsTrigger value="reviews" className="relative h-10 rounded-full px-5 text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md hover:bg-primary/10 hover:text-primary">{t('product.reviews')} ({product.reviewCount || 0})</TabsTrigger>
-                  <TabsTrigger value="qa" className="relative h-10 rounded-full px-5 text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md hover:bg-primary/10 hover:text-primary">{t('product.questions_answers')}</TabsTrigger>
-                </TabsList>
-              </div>
 
-              <div className="p-5 sm:p-6">
-                <TabsContent value="description" className="mt-0">
-                  <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/90">{description}</p>
-                </TabsContent>
-
-                <TabsContent value="specs" className="mt-0">
-                  <dl className="divide-y divide-border overflow-hidden rounded-xl border border-border">
-                    {Object.entries(specs).map(([key, value]) => (
-                      <div key={key} className="flex justify-between gap-4 px-4 py-3 text-sm odd:bg-muted/30">
-                        <dt className="text-muted-foreground">{key}</dt>
-                        <dd className="font-medium">{value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </TabsContent>
-
-                <TabsContent value="reviews" className="mt-0">
-                  <ProductReviews slug={slug} />
-                </TabsContent>
-
-                <TabsContent value="qa" className="mt-0">
-                  <ProductQA slug={slug} />
-                </TabsContent>
-              </div>
-            </Tabs>
-          </div>
 
         </div>
+      </div>
+      <div className="mt-8 mb-8 rounded-2xl border border-border bg-card shadow-sm">
+        <Tabs defaultValue="description">
+          <div className="border-b border-border px-1">
+            <TabsList className="h-14 w-full justify-start gap-2 rounded-none bg-transparent p-2 overflow-x-auto scrollbar-hide">
+              <TabsTrigger value="description" className="relative h-10 rounded-full px-5 text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md hover:bg-primary/10 hover:text-primary">{t('product.description')}</TabsTrigger>
+              <TabsTrigger value="specs" className="relative h-10 rounded-full px-5 text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md hover:bg-primary/10 hover:text-primary">{t('product.specifications')}</TabsTrigger>
+              <TabsTrigger value="reviews" className="relative h-10 rounded-full px-5 text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md hover:bg-primary/10 hover:text-primary">{t('product.reviews')} ({product.reviewCount || 0})</TabsTrigger>
+              <TabsTrigger value="qa" className="relative h-10 rounded-full px-5 text-sm font-semibold transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md hover:bg-primary/10 hover:text-primary">{t('product.questions_answers')}</TabsTrigger>
+            </TabsList>
+          </div>
+
+          <div className="p-5 sm:p-6">
+            <TabsContent value="description" className="mt-0">
+              <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/90">{description}</p>
+            </TabsContent>
+
+            <TabsContent value="specs" className="mt-0">
+              <dl className="divide-y divide-border overflow-hidden rounded-xl border border-border">
+                {Object.entries(specs).map(([key, value]) => (
+                  <div key={key} className="flex justify-between gap-4 px-4 py-3 text-sm odd:bg-muted/30">
+                    <dt className="text-muted-foreground">{key}</dt>
+                    <dd className="font-medium">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </TabsContent>
+
+            <TabsContent value="reviews" className="mt-0">
+              <ProductReviews slug={slug} />
+            </TabsContent>
+
+            <TabsContent value="qa" className="mt-0">
+              <ProductQA slug={slug} />
+            </TabsContent>
+          </div>
+        </Tabs>
       </div>
 
       <ProductRail title={t('product.frequently_bought')} endpoint={`/products/${slug}/frequently-bought-together`} />

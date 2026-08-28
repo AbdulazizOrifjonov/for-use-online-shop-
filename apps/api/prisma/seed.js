@@ -10,300 +10,83 @@ function slugify(text) {
 
 const CATEGORY_TREE = [
   {
-    nameUz: 'Elektronika', nameRu: 'Электроника', nameEn: 'Electronics',
-    imageUrl: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&auto=format&fit=crop&q=80',
+    nameUz: 'Noutbuklar', nameRu: 'Ноутбуки', nameEn: 'Laptops',
+    imageUrl: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800',
     children: [
-      { nameUz: 'Smartfonlar', nameRu: 'Смартфоны', nameEn: 'Smartphones' },
-      { nameUz: 'Noutbuklar', nameRu: 'Ноутбуки', nameEn: 'Laptops' },
-      { nameUz: 'Planshetlar', nameRu: 'Планшеты', nameEn: 'Tablets' },
-      { nameUz: 'Aqlli soatlar', nameRu: 'Умные часы', nameEn: 'Smart Watches' },
-      { nameUz: 'Televizorlar', nameRu: 'Телевизоры', nameEn: 'TVs' },
-      { nameUz: 'Audio texnika', nameRu: 'Аудиотехника', nameEn: 'Audio' },
+      { nameUz: 'Gaming Noutbuklar', nameRu: 'Игровые ноутбуки', nameEn: 'Gaming Laptops' },
+      { nameUz: 'Biznes Noutbuklar', nameRu: 'Бизнес ноутбуки', nameEn: 'Business Laptops' },
+      { nameUz: 'Ultrabuklar', nameRu: 'Ультрабуки', nameEn: 'Ultrabooks' },
     ],
   },
   {
-    nameUz: 'Maishiy texnika', nameRu: 'Бытовая техника', nameEn: 'Home Appliances',
-    imageUrl: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&auto=format&fit=crop&q=80',
+    nameUz: 'Kompyuterlar', nameRu: 'Компьютеры', nameEn: 'Computers',
+    imageUrl: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=800',
     children: [
-      { nameUz: 'Muzlatgichlar', nameRu: 'Холодильники', nameEn: 'Refrigerators' },
-      { nameUz: 'Kir yuvish mashinalari', nameRu: 'Стиральные машины', nameEn: 'Washing Machines' },
-      { nameUz: 'Idish yuvish mashinalari', nameRu: 'Посудомоечные машины', nameEn: 'Dishwashers' },
-      { nameUz: 'Konditsionerlar', nameRu: 'Кондиционеры', nameEn: 'Air Conditioners' },
+      { nameUz: 'Monitorlar', nameRu: 'Мониторы', nameEn: 'Monitors' },
+      { nameUz: 'Tizim bloklari', nameRu: 'Системные блоки', nameEn: 'System Units' },
+      { nameUz: 'Hammasi birda (All-in-One)', nameRu: 'Моноблоки', nameEn: 'All-in-One' },
     ],
   },
   {
-    nameUz: 'Asboblar', nameRu: 'Инструменты', nameEn: 'Tools',
-    imageUrl: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&auto=format&fit=crop&q=80',
+    nameUz: 'Aksessuarlar', nameRu: 'Аксессуары', nameEn: 'Accessories',
+    imageUrl: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800',
     children: [
-      { nameUz: 'Drel mashinalar', nameRu: 'Дрели', nameEn: 'Drill Machines' },
-      { nameUz: 'Qurilish asbob-uskunalari', nameRu: 'Строительное оборудование', nameEn: 'Construction Equipment' },
+      { nameUz: 'Klaviaturalar', nameRu: 'Клавиатуры', nameEn: 'Keyboards' },
+      { nameUz: 'Sichqonchalar', nameRu: 'Мыши', nameEn: 'Mice' },
+      { nameUz: 'Quloqchinlar', nameRu: 'Наушники', nameEn: 'Headphones' },
+      { nameUz: 'Sumkalar', nameRu: 'Сумки', nameEn: 'Bags' },
     ],
   },
   {
-    nameUz: 'Gaming', nameRu: 'Гейминг', nameEn: 'Gaming',
-    imageUrl: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400&auto=format&fit=crop&q=80',
+    nameUz: 'Ehtiyot qismlar', nameRu: 'Запчасти', nameEn: 'Components',
+    imageUrl: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800',
     children: [
-      { nameUz: 'Konsollar', nameRu: 'Консоли', nameEn: 'Consoles' },
-      { nameUz: 'Aksessuarlar', nameRu: 'Аксессуары', nameEn: 'Accessories' },
-    ],
-  },
-  {
-    nameUz: 'Moda', nameRu: 'Мода', nameEn: 'Fashion',
-    imageUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format&fit=crop&q=80',
-    children: [
-      { nameUz: 'Erkaklar', nameRu: 'Мужчины', nameEn: 'Men' },
-      { nameUz: 'Ayollar', nameRu: 'Женщины', nameEn: 'Women' },
+      { nameUz: 'Videokartalar', nameRu: 'Видеокарты', nameEn: 'Video Cards' },
+      { nameUz: 'Protsessorlar', nameRu: 'Процессоры', nameEn: 'Processors' },
+      { nameUz: 'Operativ xotira', nameRu: 'Оперативная память', nameEn: 'RAM' },
     ],
   },
 ];
 
-const BRANDS = ['Samsung', 'Apple', 'Xiaomi', 'LG', 'Artel', 'Sony', 'Asus', 'HP', 'Bosch', 'Nike', 'Microsoft'];
+const BRANDS = ['ASUS', 'HP', 'Lenovo', 'Apple', 'MSI', 'Acer', 'Dell', 'Logitech', 'Razer', 'Samsung', 'HyperX'];
 
 const PRODUCT_TEMPLATES = [
   {
-    name: 'Galaxy S24 Ultra', cat: 'Smartphones', brand: 'Samsung', price: 14500000,
-    images: [
-      'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1580910051074-3eb694886505?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=800&auto=format&fit=crop&q=80',
-    ]
+    name: 'ROG Strix G16', cat: 'Gaming Laptops', brand: 'ASUS', price: 18500000,
+    images: ['https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800']
   },
   {
-    name: 'iPhone 15 Pro', cat: 'Smartphones', brand: 'Apple', price: 16200000,
-    images: [
-      'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1574944985070-8f3053497092?w=800&auto=format&fit=crop&q=80',
-    ]
+    name: 'MacBook Pro 14 M3', cat: 'Ultrabooks', brand: 'Apple', price: 24000000,
+    images: ['https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800']
   },
   {
-    name: 'Redmi Note 13 Pro', cat: 'Smartphones', brand: 'Xiaomi', price: 4200000,
-    images: [
-      'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=800&auto=format&fit=crop&q=80',
-    ]
+    name: 'ThinkPad X1 Carbon', cat: 'Business Laptops', brand: 'Lenovo', price: 19800000,
+    images: ['https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800']
   },
   {
-    name: 'MacBook Air M3', cat: 'Laptops', brand: 'Apple', price: 18900000,
-    images: [
-      'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&auto=format&fit=crop&q=80',
-    ]
+    name: 'Gaming Mouse G502', cat: 'Mice', brand: 'Logitech', price: 850000,
+    images: ['https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800']
   },
   {
-    name: 'ZenBook 14 OLED', cat: 'Laptops', brand: 'Asus', price: 11500000,
-    images: [
-      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&auto=format&fit=crop&q=80',
-    ]
+    name: 'Mechanical Keyboard BlackWidow', cat: 'Keyboards', brand: 'Razer', price: 1650000,
+    images: ['https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800']
   },
   {
-    name: 'Pavilion 15', cat: 'Laptops', brand: 'HP', price: 8700000,
-    images: [
-      'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=800&auto=format&fit=crop&q=80',
-    ]
+    name: 'Odyssey G7 27"', cat: 'Monitors', brand: 'Samsung', price: 6500000,
+    images: ['https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800']
   },
   {
-    name: 'Galaxy Tab S9', cat: 'Tablets', brand: 'Samsung', price: 7800000,
-    images: [
-      'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800&auto=format&fit=crop&q=80',
-    ]
+    name: 'Cloud II Wireless', cat: 'Headphones', brand: 'HyperX', price: 1450000,
+    images: ['https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800']
   },
   {
-    name: 'iPad 10th Gen', cat: 'Tablets', brand: 'Apple', price: 6200000,
-    images: [
-      'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1587033411391-5d9e51cce126?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Watch GT 4', cat: 'Smart Watches', brand: 'Xiaomi', price: 1900000,
-    images: [
-      'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Galaxy Watch 6', cat: 'Smart Watches', brand: 'Samsung', price: 3100000,
-    images: [
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1510017803434-a899398421b3?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'No Frost RB37', cat: 'Refrigerators', brand: 'LG', price: 9800000,
-    images: [
-      'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Side-by-Side Inverter', cat: 'Refrigerators', brand: 'Samsung', price: 16700000,
-    images: [
-      'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'WAJ28080BY 8kg', cat: 'Washing Machines', brand: 'Bosch', price: 5400000,
-    images: [
-      'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'AddWash 9kg', cat: 'Washing Machines', brand: 'Samsung', price: 6900000,
-    images: [
-      'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'SMS46GI01E', cat: 'Dishwashers', brand: 'Bosch', price: 7200000,
-    images: [
-      'https://images.unsplash.com/photo-1585837575652-267c041d77d4?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Inverter Split AC 12000BTU', cat: 'Air Conditioners', brand: 'LG', price: 4300000,
-    images: [
-      'https://images.unsplash.com/photo-1631545498858-a89a08e6f1f1?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1615873968403-89e068629265?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Artel Smart Inverter', cat: 'Air Conditioners', brand: 'Artel', price: 3600000,
-    images: [
-      'https://images.unsplash.com/photo-1631545498858-a89a08e6f1f1?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1615873968403-89e068629265?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Impact Drill GSB 13RE', cat: 'Drill Machines', brand: 'Bosch', price: 980000,
-    images: [
-      'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Cordless Drill 18V', cat: 'Drill Machines', brand: 'Bosch', price: 1450000,
-    images: [
-      'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Concrete Mixer 130L', cat: 'Construction Equipment', brand: 'Bosch', price: 3200000,
-    images: [
-      'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'PlayStation 5', cat: 'Consoles', brand: 'Sony', price: 7900000,
-    images: [
-      'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Xbox Series X', cat: 'Consoles', brand: 'Microsoft', price: 7400000,
-    images: [
-      'https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1605901309584-818e25960a8f?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'DualSense Wireless Controller', cat: 'Accessories', brand: 'Sony', price: 690000,
-    images: [
-      'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Gaming Headset Pro', cat: 'Accessories', brand: 'Asus', price: 540000,
-    images: [
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Air Max Running Shoes', cat: 'Men', brand: 'Nike', price: 1250000,
-    images: [
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Classic Hoodie', cat: 'Men', brand: 'Nike', price: 480000,
-    images: [
-      'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Running Leggings', cat: 'Women', brand: 'Nike', price: 390000,
-    images: [
-      'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1483721061986-f1515251a024?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Sport Sneakers', cat: 'Women', brand: 'Nike', price: 1100000,
-    images: [
-      'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'OLED TV 55" C3', cat: 'Electronics', brand: 'LG', price: 12900000,
-    images: [
-      'https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1461151304267-38535e780c79?w=800&auto=format&fit=crop&q=80',
-    ]
-  },
-  {
-    name: 'Soundbar S800', cat: 'Electronics', brand: 'Sony', price: 3400000,
-    images: [
-      'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&auto=format&fit=crop&q=80',
-    ]
+    name: 'RTX 4090 24GB', cat: 'Video Cards', brand: 'ASUS', price: 28000000,
+    images: ['https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800']
   },
 ];
 
 async function main() {
-  console.log('Seeding database...');
+  console.log('Seeding database for Professional Tools...');
 
   await prisma.orderItem.deleteMany();
   await prisma.order.deleteMany();
@@ -324,11 +107,11 @@ async function main() {
   await prisma.address.deleteMany();
   await prisma.user.deleteMany();
 
-  const adminPasswordHash = await bcrypt.hash(process.env.ADMIN_SEED_PASSWORD || 'admin123', 12);
+  const adminPasswordHash = await bcrypt.hash('admin123', 12);
   const admin = await prisma.user.create({
     data: {
       name: 'Super Admin',
-      email: process.env.ADMIN_SEED_EMAIL || 'admin@marketpro.uz',
+      email: 'admin@protools.uz',
       username: '1234',
       passwordHash: adminPasswordHash,
       role: 'ADMIN',
@@ -337,19 +120,6 @@ async function main() {
   });
   await prisma.cart.create({ data: { userId: admin.id } });
   await prisma.wishlist.create({ data: { userId: admin.id } });
-
-  const demoCustomerHash = await bcrypt.hash('customer123', 12);
-  const customer = await prisma.user.create({
-    data: {
-      name: 'Aziz Karimov',
-      email: 'customer@marketpro.uz',
-      passwordHash: demoCustomerHash,
-      phone: '+998901234567',
-      role: 'CUSTOMER',
-    },
-  });
-  await prisma.cart.create({ data: { userId: customer.id } });
-  await prisma.wishlist.create({ data: { userId: customer.id } });
 
   const categoryBySlug = new Map();
   for (const parent of CATEGORY_TREE) {
@@ -377,59 +147,42 @@ async function main() {
     brandByName.set(name, brand);
   }
 
-  let sku = 1000;
+  let sku = 5000;
   for (const tpl of PRODUCT_TEMPLATES) {
     const category = categoryBySlug.get(tpl.cat);
     const brand = brandByName.get(tpl.brand);
     if (!category) continue;
 
-    const hasDiscount = Math.random() < 0.35;
-    const seedSlug = `${slugify(tpl.brand)}-${slugify(tpl.name)}`;
     sku += 1;
-
-    const prodImages = tpl.images || [
-      'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&auto=format&fit=crop&q=80'
-    ];
-
     await prisma.product.create({
       data: {
         nameUz: `${tpl.brand} ${tpl.name}`,
         nameRu: `${tpl.brand} ${tpl.name}`,
         nameEn: `${tpl.brand} ${tpl.name}`,
-        descriptionUz: `${tpl.brand} ${tpl.name} — yuqori sifatli mahsulot. Zamonaviy texnologiyalar va ishonchli ishlash muddati bilan.`,
-        descriptionRu: `${tpl.brand} ${tpl.name} — высококачественный продукт с современными технологиями и надёжным сроком службы.`,
-        descriptionEn: `${tpl.brand} ${tpl.name} — a high quality product with modern technology and reliable durability.`,
-        slug: seedSlug,
+        descriptionUz: `${tpl.brand} ${tpl.name} — eng so'nggi texnologiyalar asosida yaratilgan professional uskunalar.`,
+        descriptionRu: `${tpl.brand} ${tpl.name} — профессиональное оборудование, созданное на основе новейших технологий.`,
+        descriptionEn: `${tpl.brand} ${tpl.name} — professional equipment created based on the latest technology.`,
+        slug: slugify(`${tpl.brand}-${tpl.name}`),
         price: tpl.price,
-        discountPrice: hasDiscount ? Math.round(tpl.price * 0.85) : null,
-        stock: Math.floor(Math.random() * 80) + 5,
-        sku: `MP-${sku}`,
-        specs: JSON.stringify({ Brend: tpl.brand, Kafolat: '12 oy', 'Ishlab chiqarilgan davlat': 'Xitoy' }),
+        stock: 50,
+        sku: `PT-${sku}`,
+        specs: JSON.stringify({ Brend: tpl.brand, Kafolat: '24 oy' }),
         brandId: brand?.id,
         categoryId: category.id,
-        viewCount: Math.floor(Math.random() * 500),
-        soldCount: Math.floor(Math.random() * 100),
-        isFeatured: Math.random() < 0.25,
-        images: { create: prodImages.map((url, i) => ({ url, order: i })) },
+        isFeatured: true,
+        images: { create: tpl.images.map((url, i) => ({ url, order: i })) },
       },
     });
   }
 
   await prisma.sliderBanner.createMany({
     data: [
-      { title: "Yozgi chegirmalar", subtitle: "70% gacha chegirma", imageUrl: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1600&auto=format&fit=crop&q=80', link: '/catalog?onSale=true', order: 0 },
-      { title: 'Yangi smartfonlar', subtitle: "Eng so'nggi modellar", imageUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600&auto=format&fit=crop&q=80', link: '/catalog?category=smartphones', order: 1 },
-      { title: 'Gaming dunyosi', subtitle: 'Konsol va aksessuarlar', imageUrl: 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=1600&auto=format&fit=crop&q=80', link: '/catalog?category=gaming', order: 2 },
+      { title: "Yangi Gaming Noutbuklar", subtitle: "20% gacha chegirma", imageUrl: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=1600', link: '/catalog', order: 0 },
+      { title: 'Professional Monitorlar', subtitle: "4K va OLED panellar", imageUrl: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=1600', link: '/catalog', order: 1 },
     ],
   });
 
-  await prisma.coupon.create({
-    data: { code: 'WELCOME10', type: 'PERCENT', value: 10, minOrder: 100000, usageLimit: 1000 },
-  });
-
-  console.log('Seed complete.');
-  console.log(`Admin login -> username: 1234, password: ${process.env.ADMIN_SEED_PASSWORD || 'admin123'}`);
-  console.log('Customer login -> email: customer@marketpro.uz, password: customer123');
+  console.log('Seed complete for Professional Tools.');
 }
 
 main()

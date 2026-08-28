@@ -3,7 +3,7 @@ import { NavLink, Outlet, Link, useLocation, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard, Package, FolderTree, ShoppingBag, Users, Image, Tag, BarChart3,
-  ArrowLeft, Crown, PanelLeftClose, PanelLeftOpen, Menu, X, Zap, Star, Aperture,
+  ArrowLeft, Crown, PanelLeftClose, PanelLeftOpen, Menu, X, Zap, Star, Aperture, HelpCircle,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/layout/Logo';
@@ -56,6 +56,7 @@ export default function AdminLayout() {
     { to: '/admin/orders', icon: ShoppingBag, label: t('admin.orders') },
     { to: '/admin/users', icon: Users, label: t('admin.users') },
     { to: '/admin/reviews', icon: Star, label: 'Sharhlar' },
+    { to: '/admin/questions', icon: HelpCircle, label: 'Savollar' },
     { to: '/admin/sliders', icon: Image, label: t('admin.sliders') },
     { to: '/admin/coupons', icon: Tag, label: t('admin.coupons') },
     { to: '/admin/flash-sale', icon: Zap, label: t('admin.flash_sale') },
@@ -87,8 +88,7 @@ export default function AdminLayout() {
           ) : (
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center gap-2 font-bold">
-                <Logo size={28} />
-                <span>Admin</span>
+                <Logo size={36} />
               </div>
               {isMobile ? (
                 <button
@@ -156,9 +156,9 @@ export default function AdminLayout() {
   return (
     <div className="flex min-h-svh">
       {/* Desktop sidebar */}
-      <aside className={cn('hidden lg:block shrink-0 transition-all duration-200', sidebarWidth)}>
+      <aside className={cn('hidden lg:block shrink-0 transition-all duration-500 ease-in-out', sidebarWidth)}>
         <div className={cn(
-          'fixed top-0 left-0 z-30 flex h-svh flex-col border-r border-border bg-[#087A35] text-white transition-all duration-200',
+          'fixed top-0 left-0 z-30 flex h-svh flex-col border-r border-border bg-[#0C4A6E] text-white transition-all duration-500 ease-in-out',
           sidebarWidth
         )}>
           <SidebarContent />
@@ -166,14 +166,15 @@ export default function AdminLayout() {
       </aside>
 
       {/* Mobile sidebar overlay */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
-          <div className="absolute top-0 left-0 z-50 flex h-svh w-64 flex-col border-r border-border bg-[#087A35] text-white shadow-xl">
-            <SidebarContent isMobile />
-          </div>
+      <div className={cn("fixed inset-0 z-40 lg:hidden transition-opacity duration-500 ease-in-out", mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none")}>
+        <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
+        <div className={cn(
+          "absolute top-0 left-0 z-50 flex h-svh w-64 flex-col border-r border-border bg-[#0C4A6E] text-white shadow-xl transition-transform duration-500 ease-in-out",
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        )}>
+          <SidebarContent isMobile />
         </div>
-      )}
+      </div>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border bg-card px-4">

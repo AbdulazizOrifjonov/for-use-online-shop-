@@ -35,6 +35,9 @@ export const ProductCard = memo(function ProductCard({ product }) {
     : 0;
   const outOfStock = product.stock <= 0;
 
+  const images = product.images || [];
+  const [activeImage, setActiveImage] = useState(0);
+
   function requireAuth() {
     if (!isAuthenticated) {
       toast.info(t('auth.login_title'));
@@ -96,18 +99,49 @@ export const ProductCard = memo(function ProductCard({ product }) {
       className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5"
     >
       <div className="relative aspect-square w-full overflow-hidden bg-muted">
-        {image ? (
-          <img
-            src={image}
-            alt={name}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy"
-          />
+        {images.length > 0 ? (
+          <>
+            <div 
+              className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+              onScroll={(e) => {
+                const scrollLeft = e.currentTarget.scrollLeft;
+                const width = e.currentTarget.clientWidth;
+                if (width > 0) {
+                  const index = Math.round(scrollLeft / width);
+                  if (index !== activeImage) setActiveImage(index);
+                }
+              }}
+            >
+              {images.map((img, i) => (
+                <div key={i} className="h-full w-full shrink-0 snap-center relative">
+                  <img
+                    src={img.url}
+                    alt={name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 pointer-events-none"
+                  />
+                </div>
+              ))}
+            </div>
+            {images.length > 1 && (
+              <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 px-2 pointer-events-none z-10">
+                {images.map((_, idx) => (
+                  <div
+                    key={idx}
+                    className={cn(
+                      "h-1 rounded-full transition-all duration-300 shadow-sm",
+                      activeImage === idx ? "w-4 bg-primary" : "w-1.5 bg-white/70 dark:bg-black/50"
+                    )}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         ) : (
           <div className="flex h-full items-center justify-center text-muted-foreground text-xs">No image</div>
         )}
 
-        <div className="absolute left-2 top-2 flex flex-col gap-1">
+        <div className="absolute left-2 top-2 z-10 flex flex-col gap-1 pointer-events-none">
           {hasDiscount && <Badge>-{discountPercent}%</Badge>}
           {outOfStock && <Badge variant="secondary">{t('product.out_of_stock')}</Badge>}
         </div>

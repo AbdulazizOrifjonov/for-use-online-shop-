@@ -74,55 +74,55 @@ export function NotificationBell() {
       >
         <Bell className="h-5 w-5" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs font-bold text-white">
+          <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-12 z-50 w-96 rounded-xl border border-border bg-card shadow-xl">
-          <div className="flex items-center justify-between border-b border-border px-4 py-3">
-            <h3 className="font-semibold">Ogohlantiruvchilar</h3>
+        <div className="absolute right-[-10px] sm:right-0 top-12 z-50 w-[300px] sm:w-96 rounded-xl border border-border bg-card shadow-2xl overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border bg-muted/20 px-3 sm:px-4 py-3 gap-2">
+            <h3 className="font-semibold text-sm sm:text-base">Ogohlantirishlar</h3>
             {unreadCount > 0 && (
               <button
                 onClick={markAllAsRead}
-                className="text-xs text-primary hover:underline"
+                className="text-[11px] sm:text-xs text-primary hover:underline self-start sm:self-auto"
               >
                 Barchasini o'qilgan deb belgilash
               </button>
             )}
           </div>
 
-          <div className="max-h-96 overflow-y-auto">
+          <div className="max-h-[70vh] overflow-y-auto">
             {orderNotifications.length === 0 ? (
               <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-                Ogohlantiruvchi yo'q
+                Ogohlantirish yo'q
               </div>
             ) : (
               orderNotifications.map((notif) => (
                 <div
                   key={notif.id}
                   className={cn(
-                    'border-b border-border px-4 py-3 transition-colors',
+                    'border-b border-border px-3 sm:px-4 py-3 transition-colors hover:bg-muted/50',
                     !notif.isRead && 'bg-primary/5'
                   )}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2 sm:gap-3">
                     <div className="flex-1 min-w-0">
-                      <p className={cn('text-sm', !notif.isRead && 'font-semibold')}>
+                      <p className={cn('text-[13px] sm:text-sm leading-tight sm:leading-normal', !notif.isRead && 'font-semibold text-foreground', notif.isRead && 'text-muted-foreground')}>
                         {notif.message}
                       </p>
-                      <p className="text-xs text-muted-foreground mt-1">
+                      <p className="text-[10px] sm:text-xs text-muted-foreground/70 mt-1">
                         {new Date(notif.createdAt).toLocaleString('uz-UZ')}
                       </p>
                     </div>
                     {!notif.isRead && (
                       <button
                         onClick={() => markAsRead(notif.id)}
-                        className="shrink-0 p-1 hover:bg-muted rounded transition-colors"
+                        className="shrink-0 p-1 hover:bg-muted rounded-full transition-colors mt-0.5"
                       >
-                        <X className="h-4 w-4 text-muted-foreground" />
+                        <X className="h-3.5 w-3.5 text-muted-foreground" />
                       </button>
                     )}
                   </div>

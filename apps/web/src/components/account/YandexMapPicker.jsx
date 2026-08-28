@@ -24,8 +24,10 @@ export function YandexMapPicker({ lat, lng, onChange, onAddressDetected }) {
   const [isLocating, setIsLocating] = useState(false);
   const [locateError, setLocateError] = useState('');
 
-  onChangeRef.current = onChange;
-  onAddressDetectedRef.current = onAddressDetected;
+  useEffect(() => {
+    onChangeRef.current = onChange;
+    onAddressDetectedRef.current = onAddressDetected;
+  }, [onChange, onAddressDetected]);
 
   function setPin(map, coords) {
     if (placemarkRef.current) map.geoObjects.remove(placemarkRef.current);

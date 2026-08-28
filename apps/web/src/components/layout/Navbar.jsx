@@ -45,8 +45,8 @@ export function Navbar({ onMenuClick }) {
   }
 
   return (
-    <header className="sticky top-0 z-30 h-16 border-b border-primary/20 bg-background/95 shadow-sm backdrop-blur-xl">
-      <div className="mx-auto flex h-full max-w-[1440px] items-center gap-2 px-3 sm:px-4 lg:px-6">
+    <header className="sticky top-0 z-30 border-b border-primary/20 bg-background/95 shadow-sm backdrop-blur-xl pt-[env(safe-area-inset-top)]">
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-2 px-3 sm:px-4 lg:px-6">
         <button
           className="rounded-lg p-2 hover:bg-accent lg:hidden"
           onClick={onMenuClick}
@@ -56,8 +56,7 @@ export function Navbar({ onMenuClick }) {
         </button>
 
         <Link to="/" className="flex shrink-0 items-center gap-2 font-bold text-lg sm:text-xl">
-          <Logo size={32} />
-          <span className="hidden sm:inline">DELUX</span>
+          <Logo size={40} />
         </Link>
 
         <button

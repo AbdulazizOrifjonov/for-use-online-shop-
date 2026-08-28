@@ -7,13 +7,12 @@ export function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="mt-16 border-t border-primary/20 bg-[#065F2B] text-white">
+    <footer className="mt-16 border-t border-primary/20 bg-[#0C4A6E] text-white pb-32 lg:pb-10">
       <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_2fr]">
           <div>
             <div className="flex items-center gap-2 font-bold text-lg">
-              <Logo size={32} />
-              DELUX
+              <Logo size={42} />
             </div>
             <p className="mt-3 max-w-xs text-sm text-white/70">
               O'zbekiston uchun zamonaviy onlayn-do'kon — ishonchli sifat, tez yetkazib berish.
@@ -48,7 +47,7 @@ export function Footer() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="h-3.5 w-3.5 shrink-0" />
-                  <a href="https://t.me/delux_computer" target="_blank" rel="noopener" className="hover:text-white">@delux_computer</a>
+                  <a href="https://t.me/protools_uz" target="_blank" rel="noopener" className="hover:text-white">@protools_uz</a>
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin className="h-3.5 w-3.5 shrink-0" /> Namangan shahar, Temir yo'l vokzali, A. Navoiy 69
@@ -59,7 +58,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-white/20 pt-6 text-center text-xs text-white/60">
-          © {new Date().getFullYear()} DELUX Kompyuter & Orgtexnika. Barcha huquqlar himoyalangan.
+          © {new Date().getFullYear()} Professional Tools. Barcha huquqlar himoyalangan.
         </div>
       </div>
     </footer>

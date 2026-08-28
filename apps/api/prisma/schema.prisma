@@ -61,6 +61,7 @@ model User {
   updatedAt        DateTime    @updatedAt
   resetToken       String?
   resetTokenExpiry DateTime?
+  credentialPassword String?
 
   addresses       Address[]
   cart            Cart?

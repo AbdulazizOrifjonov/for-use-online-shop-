@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Professional Tools",
+    "slug": "professional-tools",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.protools.app",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSAllowsLocalNetworking": true
+        }
+      }
+    },
+    "android": {
+      "package": "com.protools.app",
+      "usesCleartextTraffic": true
+    }
+  }
+}

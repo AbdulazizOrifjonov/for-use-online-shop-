@@ -51,24 +51,29 @@ export default function Sliders() {
       ) : (
         <div className="space-y-2">
           {sliders.map((s) => (
-            <div key={s.id} className="flex items-center gap-3 rounded-xl border border-border bg-card p-3">
-              <GripVertical className="h-4 w-4 text-muted-foreground" />
-              <img src={s.imageUrl} alt="" className="h-14 w-24 rounded-lg object-cover" />
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold">{s.title}</p>
-                <p className="text-xs text-muted-foreground">{s.subtitle}</p>
+            <div key={s.id} className="flex flex-col sm:flex-row sm:items-center gap-3 rounded-xl border border-border bg-card p-3">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <GripVertical className="h-4 w-4 shrink-0 text-muted-foreground hidden sm:block" />
+                <img src={s.imageUrl} alt="" className="h-12 w-20 sm:h-14 sm:w-24 shrink-0 rounded-lg object-cover" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-[13px] sm:text-sm font-semibold truncate">{s.title}</p>
+                  <p className="text-[11px] sm:text-xs text-muted-foreground truncate">{s.subtitle}</p>
+                </div>
               </div>
-              <Button variant="outline" size="sm" onClick={() => toggleActive(s)}>
-                {s.isActive ? 'Faol' : 'Nofaol'}
-              </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <Link to={`/admin/sliders/${s.id}/edit`}>
-                  <Pencil className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="ghost" size="icon" onClick={() => handleDelete(s)}>
-                <Trash2 className="h-4 w-4 text-destructive" />
-              </Button>
+              
+              <div className="flex items-center justify-end gap-1 sm:gap-2 border-t border-border/50 sm:border-0 pt-2 sm:pt-0 mt-1 sm:mt-0">
+                <Button variant={s.isActive ? 'default' : 'secondary'} size="sm" onClick={() => toggleActive(s)} className="h-7 sm:h-9 text-[11px] sm:text-sm px-3 mr-auto sm:mr-0">
+                  {s.isActive ? 'Faol' : 'Nofaol'}
+                </Button>
+                <Button variant="ghost" size="icon" asChild className="h-7 w-7 sm:h-9 sm:w-9">
+                  <Link to={`/admin/sliders/${s.id}/edit`}>
+                    <Pencil className="h-3.5 w-3.5 sm:h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => handleDelete(s)} className="h-7 w-7 sm:h-9 sm:w-9 text-destructive hover:bg-destructive/10">
+                  <Trash2 className="h-3.5 w-3.5 sm:h-4 w-4" />
+                </Button>
+              </div>
             </div>
           ))}
         </div>

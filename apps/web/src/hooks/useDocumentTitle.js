@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 export function useDocumentTitle(title) {
   useEffect(() => {
     const previous = document.title;
-    document.title = title ? `${title} | DELUX Kompyuter & Orgtexnika` : 'DELUX Kompyuter & Orgtexnika';
+    document.title = title ? `${title} | Professional Tools` : 'Professional Tools';
     return () => {
       document.title = previous;
     };

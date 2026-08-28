@@ -60,8 +60,11 @@ async function fixPicsumImages() {
   }
 }
 
-const server = app.listen(PORT, () => {
-  console.log(`DELUX API running on http://localhost:${PORT}`);
+const PORT = process.env.PORT || 5000;
+const HOST = process.env.HOST || '0.0.0.0';
+const server = app.listen(PORT, HOST, () => {
+  console.log(`Professional Tools API running on http://localhost:${PORT}`);
+  console.log(`Network access: http://0.0.0.0:${PORT}`);
   startBot();
   fixPicsumImages();
 });

@@ -55,7 +55,17 @@ export function ImageLightbox({ images, index, onIndexChange, onClose }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.18 }}
-              className="max-h-[80svh] max-w-full select-none rounded-lg object-contain"
+              className="max-h-[80svh] max-w-full select-none rounded-lg object-contain cursor-grab active:cursor-grabbing touch-none"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.4}
+              onDragEnd={(e, { offset }) => {
+                if (offset.x < -50) {
+                  onIndexChange((index + 1) % images.length);
+                } else if (offset.x > 50) {
+                  onIndexChange((index - 1 + images.length) % images.length);
+                }
+              }}
             />
           </AnimatePresence>
 

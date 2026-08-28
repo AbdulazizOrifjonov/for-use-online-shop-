@@ -12,6 +12,7 @@ export function ProductReviews({ slug }) {
   const { t } = useTranslation();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const [reviews, setReviews] = useState([]);
+  const [canReview, setCanReview] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -25,7 +26,10 @@ export function ProductReviews({ slug }) {
     setIsLoading(true);
     api
       .get(`/reviews/${slug}`)
-      .then(({ data }) => setReviews(data.reviews))
+      .then(({ data }) => {
+        setReviews(data.reviews);
+        setCanReview(data.canReview);
+      })
       .finally(() => setIsLoading(false));
   }
 
@@ -90,7 +94,7 @@ export function ProductReviews({ slug }) {
         </div>
       )}
 
-      {isAuthenticated && (
+      {isAuthenticated && canReview && (
         <form onSubmit={submitReview} className="rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-sm space-y-4">
           <h4 className="text-sm font-bold text-foreground">{t('product.write_review')}</h4>
           <div className="flex items-center gap-1">
@@ -157,6 +161,14 @@ export function ProductReviews({ slug }) {
             {t('common.save')}
           </Button>
         </form>
+      )}
+
+      {isAuthenticated && !canReview && !isLoading && (
+        <div className="rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-sm text-center">
+          <p className="text-sm text-muted-foreground">
+            Ushbu mahsulotga faqatgina uni xarid qilgan va mahsulot yetkazib berilgan mijozlargina sharh qoldirishi mumkin.
+          </p>
+        </div>
       )}
 
       {isLoading ? (

@@ -1,4 +1,4 @@
-/* DELUX Kompyuter & Orgtexnika — Official deluxpc.uz Style System */
+/* Professional Tools — Official protools.uz Style System */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
@@ -511,7 +511,7 @@ body {
   line-height: 1.6;
 }
 
-/* OFFICIAL DELUX PRODUCTS GRID */
+/* OFFICIAL PROFESSIONAL TOOLS PRODUCTS GRID */
 .prod-card-official {
   padding: 24px;
   border-radius: 24px;

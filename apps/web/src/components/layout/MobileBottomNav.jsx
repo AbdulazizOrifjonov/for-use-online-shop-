@@ -36,8 +36,8 @@ export function MobileBottomNav() {
   ];
 
   return (
-    <nav aria-label="mobile navigation" className="fixed bottom-0 left-0 right-0 z-40 rounded-t-2xl bg-background/95 shadow-[0_-8px_30px_-5px_rgba(0,0,0,0.1)] backdrop-blur-xl lg:hidden">
-      <div className="flex h-14 items-center justify-around px-1">
+    <nav aria-label="mobile navigation" className="fixed bottom-3 left-3 right-3 z-40 mb-[env(safe-area-inset-bottom)] rounded-2xl border border-border/50 bg-background/95 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl lg:hidden">
+      <div className="flex h-[52px] items-center justify-around px-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path));

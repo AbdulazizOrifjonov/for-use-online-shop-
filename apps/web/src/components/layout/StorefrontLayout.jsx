@@ -12,7 +12,7 @@ export function StorefrontLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-svh flex-col pb-14 lg:pb-0">
+    <div className="flex min-h-svh flex-col">
       <TopBar />
       <Navbar onMenuClick={() => setSidebarOpen(true)} />
       <CategoryQuickBar />

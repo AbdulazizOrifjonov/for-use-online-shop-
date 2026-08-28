@@ -126,20 +126,20 @@ export default function AdminFlashSale() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="flex items-center gap-2 text-xl font-bold">
-          <Zap className="h-5 w-5 text-amber-500" />
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-2">
+        <h1 className="flex items-center gap-2 text-lg sm:text-xl font-bold">
+          <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500" />
           {t('admin.flash_sale')}
         </h1>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" asChild>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <Button variant="outline" size="sm" asChild className="flex-1 sm:flex-none h-8 sm:h-9 text-[11px] sm:text-sm">
             <Link to="/admin/products/new">
-              <Plus className="h-4 w-4" /> Yangi mahsulot
+              <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1 sm:mr-0" /> <span className="hidden sm:inline">Yangi mahsulot</span><span className="sm:hidden">Mahsulot</span>
             </Link>
           </Button>
-          <Button onClick={() => setShowCreate(true)} className="gap-2">
-            <Plus className="h-4 w-4" />
-            Yangi aksiya
+          <Button size="sm" onClick={() => setShowCreate(true)} className="flex-1 sm:flex-none h-8 sm:h-9 text-[11px] sm:text-sm">
+            <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1 sm:mr-0" />
+            <span className="hidden sm:inline">Yangi aksiya</span><span className="sm:hidden">Aksiya</span>
           </Button>
         </div>
       </div>
@@ -157,27 +157,27 @@ export default function AdminFlashSale() {
         <div className="space-y-4">
           {sales.map((sale) => (
             <div key={sale.id} className="rounded-xl border border-border bg-card overflow-hidden">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-muted/30 p-4">
-                <div className="flex items-center gap-3">
-                  <Badge variant={sale.isActive && new Date(sale.endsAt) > new Date() ? 'default' : 'secondary'}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border bg-muted/30 p-3 sm:p-4">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <Badge variant={sale.isActive && new Date(sale.endsAt) > new Date() ? 'default' : 'secondary'} className="text-[10px] sm:text-xs">
                     {sale.isActive && new Date(sale.endsAt) > new Date() ? 'Faol' : 'Nofaol'}
                   </Badge>
-                  <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1.5 text-[11px] sm:text-sm text-muted-foreground">
                     <Clock className="h-3.5 w-3.5" />
                     {formatTimeLeft(sale.endsAt)}
                   </div>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-[10px] sm:text-xs text-muted-foreground">
                     {sale.items.length} ta mahsulot
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Button variant="ghost" size="icon" onClick={() => setShowAddProduct(sale.id)} title="Mahsulot qo'shish">
+                <div className="flex items-center gap-1 self-end sm:self-auto mt-1 sm:mt-0">
+                  <Button variant="ghost" size="icon" onClick={() => setShowAddProduct(sale.id)} title="Mahsulot qo'shish" className="h-8 w-8">
                     <Plus className="h-4 w-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" onClick={() => toggleActive(sale)} title={sale.isActive ? "O'chirish" : 'Faollashtirish'}>
+                  <Button variant="ghost" size="icon" onClick={() => toggleActive(sale)} title={sale.isActive ? "O'chirish" : 'Faollashtirish'} className="h-8 w-8">
                     {sale.isActive ? <PowerOff className="h-4 w-4 text-destructive" /> : <Power className="h-4 w-4 text-success" />}
                   </Button>
-                  <Button variant="ghost" size="icon" onClick={() => handleDelete(sale.id)}>
+                  <Button variant="ghost" size="icon" onClick={() => handleDelete(sale.id)} className="h-8 w-8">
                     <Trash2 className="h-4 w-4 text-destructive" />
                   </Button>
                 </div>

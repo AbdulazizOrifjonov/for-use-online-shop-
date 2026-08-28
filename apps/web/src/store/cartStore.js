@@ -5,7 +5,7 @@ import { useAuthStore } from '@/store/authStore';
 
 function getGuestCart() {
   try {
-    const raw = localStorage.getItem('delux_guest_cart');
+    const raw = localStorage.getItem('protools_guest_cart');
     return raw ? JSON.parse(raw) : { items: [] };
   } catch {
     return { items: [] };
@@ -14,8 +14,10 @@ function getGuestCart() {
 
 function setGuestCart(cart) {
   try {
-    localStorage.setItem('delux_guest_cart', JSON.stringify(cart));
-  } catch {}
+    localStorage.setItem('protools_guest_cart', JSON.stringify(cart));
+  } catch {
+    // ignore
+  }
 }
 
 export const useCartStore = create((set, get) => ({
@@ -36,9 +38,11 @@ export const useCartStore = create((set, get) => ({
         for (const item of guestCart.items) {
           try {
             await api.post('/cart/items', { productId: item.productId, quantity: item.quantity });
-          } catch {}
+          } catch {
+            // ignore
+          }
         }
-        localStorage.removeItem('delux_guest_cart');
+        localStorage.removeItem('protools_guest_cart');
       }
 
       const { data } = await api.get('/cart');
@@ -137,7 +141,7 @@ export const useCartStore = create((set, get) => ({
   clearCart: async () => {
     const isAuth = useAuthStore.getState().isAuthenticated;
     if (!isAuth) {
-      localStorage.removeItem('delux_guest_cart');
+      localStorage.removeItem('protools_guest_cart');
       set({ cart: { items: [] } });
       toast.info('🗑️ Savat tozalandi');
       return;

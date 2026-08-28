@@ -17,7 +17,19 @@ export const listProductReviews = asyncHandler(async (req, res) => {
     images: typeof r.images === 'string' ? JSON.parse(r.images || '[]') : r.images || [],
   }));
 
-  res.json({ reviews: parsedReviews });
+  let canReview = false;
+  if (req.user) {
+    const deliveredOrder = await prisma.order.findFirst({
+      where: {
+        userId: req.user.id,
+        status: 'DELIVERED',
+        items: { some: { productId: product.id } },
+      },
+    });
+    canReview = !!deliveredOrder;
+  }
+
+  res.json({ reviews: parsedReviews, canReview });
 });
 
 export const listFeaturedReviews = asyncHandler(async (req, res) => {
@@ -176,22 +188,20 @@ export const createReview = asyncHandler(async (req, res) => {
   const product = await prisma.product.findUnique({ where: { slug: req.params.slug } });
   if (!product) throw new AppError('Product not found', 404, 'NOT_FOUND');
 
-  if (req.user.role !== 'ADMIN') {
-    const deliveredOrder = await prisma.order.findFirst({
-      where: {
-        userId: req.user.id,
-        status: 'DELIVERED',
-        items: { some: { productId: product.id } },
-      },
-    });
+  const deliveredOrder = await prisma.order.findFirst({
+    where: {
+      userId: req.user.id,
+      status: 'DELIVERED',
+      items: { some: { productId: product.id } },
+    },
+  });
 
-    if (!deliveredOrder) {
-      throw new AppError(
-        "Mahsulot hali yetkazilmadi. Admin tomonidan 'Yetkazildi' holatiga o'tkazilgach baholashingiz mumkin.",
-        403,
-        'NOT_DELIVERED_YET'
-      );
-    }
+  if (!deliveredOrder) {
+    throw new AppError(
+      "Mahsulot hali yetkazilmadi. Admin tomonidan 'Yetkazildi' holatiga o'tkazilgach baholashingiz mumkin.",
+      403,
+      'NOT_DELIVERED_YET'
+    );
   }
 
   if (!rating || rating < 1 || rating > 5) {

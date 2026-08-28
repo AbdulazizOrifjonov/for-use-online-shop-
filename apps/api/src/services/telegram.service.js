@@ -36,7 +36,7 @@ async function onStart(ctx) {
 
   await ctx.replyWithHTML(
     '👋 Salom!\n\n' +
-    '<b>DELUX</b> ga xush kelibsiz.\n\n' +
+    '<b>Professional Tools</b> ga xush kelibsiz.\n\n' +
     'Tasdiqlash kodini olish uchun quyidagi tugmani bosing 👇',
     SHARE_KEYBOARD
   );
@@ -206,7 +206,7 @@ export function startBot() {
 
   bot
     .launch({ dropPendingUpdates: true })
-    .then(() => console.log('[Bot] ✓ DELUX Telegram Bot ishga tushdi'))
+    .then(() => console.log('[Bot] ✓ Professional Tools Telegram Bot ishga tushdi'))
     .catch((err) => {
       console.warn('[Bot] ⚠️ Telegram bot connection / polling notice:', err.message);
     });

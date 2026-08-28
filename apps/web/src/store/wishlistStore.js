@@ -6,7 +6,7 @@ import { useCartStore } from '@/store/cartStore';
 
 function getGuestWishlist() {
   try {
-    const raw = localStorage.getItem('delux_guest_wishlist');
+    const raw = localStorage.getItem('protools_guest_wishlist');
     return raw ? JSON.parse(raw) : { items: [] };
   } catch {
     return { items: [] };
@@ -15,8 +15,10 @@ function getGuestWishlist() {
 
 function setGuestWishlist(wishlist) {
   try {
-    localStorage.setItem('delux_guest_wishlist', JSON.stringify(wishlist));
-  } catch {}
+    localStorage.setItem('protools_guest_wishlist', JSON.stringify(wishlist));
+  } catch {
+    // ignore
+  }
 }
 
 export const useWishlistStore = create((set, get) => ({
@@ -41,9 +43,11 @@ export const useWishlistStore = create((set, get) => ({
         for (const item of guestWishlist.items) {
           try {
             await api.post('/wishlist/items', { productId: item.productId });
-          } catch {}
+          } catch {
+            // ignore
+          }
         }
-        localStorage.removeItem('delux_guest_wishlist');
+        localStorage.removeItem('protools_guest_wishlist');
       }
 
       const { data } = await api.get('/wishlist');

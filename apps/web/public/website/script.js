@@ -1,4 +1,4 @@
-// DELUX Presentation — Apple 3D Scroll Reveal, Dynamic System Monitor & Liquid Animations
+// Professional Tools Presentation — Apple 3D Scroll Reveal, Dynamic System Monitor & Liquid Animations
 
 document.addEventListener('DOMContentLoaded', () => {
 

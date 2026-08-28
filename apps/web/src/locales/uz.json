@@ -55,6 +55,14 @@
     "invalid_credentials": "Login yoki parol noto'g'ri",
     "reset_email_sent": "Agar email mavjud bo'lsa, tiklash havolasi yuborildi"
   },
+  "footer": {
+    "about_title": "Professional Tools haqida",
+    "about_text": "Biz mijozlarimizga eng so'nggi va sifatli kompyuter texnikalarini, noutbuklar va aksessuarlarni hamyonbop narxlarda yetkazib beramiz.",
+    "contact_title": "Aloqa",
+    "address": "Toshkent shahri, Yunusobod tumani",
+    "phone": "+998 71 123 45 67",
+    "email": "info@protools.uz"
+  },
   "product": {
     "add_to_cart": "Savatchaga qo'shish",
     "buy_now": "Hozir sotib olish",

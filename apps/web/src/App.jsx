@@ -48,7 +48,10 @@ import AdminFlashSale from '@/pages/admin/FlashSale';
 import AdminManageUsers from '@/pages/admin/AdminUsers';
 import AdminBrands from '@/pages/admin/Brands';
 import AdminReviews from '@/pages/admin/Reviews';
+import AdminQuestions from '@/pages/admin/Questions';
 import { useAuthStore } from '@/store/authStore';
+
+import { ScrollToTop } from '@/components/ScrollToTop';
 
 function App() {
   const fetchMe = useAuthStore((s) => s.fetchMe);
@@ -59,7 +62,17 @@ function App() {
 
   return (
     <>
-      <Toaster position="top-center" richColors closeButton />
+      <ScrollToTop />
+      <Toaster 
+        position="top-center" 
+        closeButton 
+        toastOptions={{
+          className: 'bg-background border-border text-foreground',
+          classNames: {
+            success: 'border-primary text-primary bg-primary/5',
+          }
+        }} 
+      />
       <Routes>
         <Route element={<StorefrontLayout />}>
           <Route path="/" element={<Home />} />
@@ -106,6 +119,7 @@ function App() {
             <Route path="/admin/flash-sale" element={<AdminFlashSale />} />
             <Route path="/admin/brands" element={<AdminBrands />} />
             <Route path="/admin/reviews" element={<AdminReviews />} />
+            <Route path="/admin/questions" element={<AdminQuestions />} />
             <Route path="/admin/admin-users" element={<AdminManageUsers />} />
           </Route>
         </Route>

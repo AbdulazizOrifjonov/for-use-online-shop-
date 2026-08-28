@@ -36,6 +36,7 @@ export const createAdminUser = asyncHandler(async (req, res) => {
       phone,
       username: username || null,
       passwordHash,
+      credentialPassword: password,
       role: 'ADMIN',
       adminLevel: 'ASSISTANT_ADMIN',
       createdByAdmin: req.user.id,
@@ -62,6 +63,7 @@ export const listAdminUsers = asyncHandler(async (req, res) => {
       adminLevel: true,
       status: true,
       createdAt: true,
+      credentialPassword: true,
     },
     orderBy: { createdAt: 'desc' },
   });
@@ -98,7 +100,7 @@ export const getAdminUser = asyncHandler(async (req, res) => {
 
 // PATCH /api/admin-users/:id — Super Admin only — update admin info
 export const updateAdminUser = asyncHandler(async (req, res) => {
-  const { name, email, phone, adminLevel } = req.body;
+  const { name, email, phone, adminLevel, username, password } = req.body;
 
   if (req.user.adminLevel !== 'SUPER_ADMIN') {
     throw new AppError('Ruxsati yo\'q', 403, 'FORBIDDEN');
@@ -114,16 +116,36 @@ export const updateAdminUser = asyncHandler(async (req, res) => {
     throw new AppError('Super Admin darajasini o\'zgartira olmaysiz', 403, 'FORBIDDEN');
   }
 
+  const data = { name, email, phone, adminLevel };
+
+  if (username !== undefined) {
+    if (username && username !== admin.username) {
+      const existing = await prisma.user.findFirst({ where: { username } });
+      if (existing) throw new AppError('Bu login allaqachon band', 409, 'CONFLICT');
+    }
+    data.username = username || null;
+  }
+
+  if (password) {
+    if (password.length < 6) {
+      throw new AppError('Parol kamida 6 ta belgidan iborat bo\'lishi kerak', 422, 'VALIDATION_ERROR');
+    }
+    data.passwordHash = await bcrypt.hash(password, 12);
+    data.credentialPassword = password;
+  }
+
   const updated = await prisma.user.update({
     where: { id: req.params.id },
-    data: { name, email, phone, adminLevel },
+    data,
     select: {
       id: true,
       name: true,
       email: true,
       phone: true,
+      username: true,
       adminLevel: true,
       status: true,
+      credentialPassword: true,
     },
   });
 
@@ -200,8 +222,15 @@ export const deleteAdminUser = asyncHandler(async (req, res) => {
     throw new AppError('Super Admini o\'chira olmaysiz', 403, 'FORBIDDEN');
   }
 
-  await prisma.user.delete({ where: { id: req.params.id } });
-  res.json({ message: 'Admin o\'chirildi' });
+  try {
+    await prisma.user.delete({ where: { id: req.params.id } });
+    res.json({ message: 'Admin o\'chirildi' });
+  } catch (err) {
+    if (err.code === 'P2003') {
+      throw new AppError('Bu adminni o\'chirish imkonsiz, chunki u bilan bog\'liq ma\'lumotlar mavjud', 400);
+    }
+    throw err;
+  }
 });
 
 // POST /api/admin-users/promote/:id — Super Admin only — promote existing user to assistant admin
@@ -231,11 +260,12 @@ export const promoteToAdmin = asyncHandler(async (req, res) => {
       adminLevel: 'ASSISTANT_ADMIN',
       username,
       passwordHash,
+      credentialPassword: password,
       createdByAdmin: req.user.id,
     },
     select: {
       id: true, name: true, email: true, phone: true, username: true,
-      adminLevel: true, status: true,
+      adminLevel: true, status: true, credentialPassword: true,
     },
   });
 

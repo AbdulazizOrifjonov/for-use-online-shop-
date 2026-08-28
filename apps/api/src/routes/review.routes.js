@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authenticate, requireAdmin } from '../middleware/auth.js';
+import { authenticate, requireAdmin, optionalAuth } from '../middleware/auth.js';
 import {
   listProductReviews,
   listFeaturedReviews,
@@ -16,7 +16,7 @@ router.get('/featured', listFeaturedReviews);
 router.get('/pending-feedback', authenticate, getPendingFeedback);
 router.get('/product-ratings', authenticate, requireAdmin, getProductRatings);
 router.get('/all', authenticate, requireAdmin, listAllReviews);
-router.get('/:slug', listProductReviews);
+router.get('/:slug', optionalAuth, listProductReviews);
 router.post('/:slug', authenticate, createReview);
 router.delete('/:id', authenticate, deleteReview);
 

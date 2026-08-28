@@ -70,7 +70,11 @@ export const deleteAddress = asyncHandler(async (req, res) => {
 });
 
 export const listUsersAdmin = asyncHandler(async (req, res) => {
-  const users = await prisma.user.findMany({ select: SAFE_SELECT, orderBy: { createdAt: 'desc' } });
+  const users = await prisma.user.findMany({ 
+    where: { role: 'CUSTOMER' },
+    select: SAFE_SELECT, 
+    orderBy: { createdAt: 'desc' } 
+  });
   res.json({ users });
 });
 

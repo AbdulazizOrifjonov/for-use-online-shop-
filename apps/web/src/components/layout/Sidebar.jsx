@@ -75,7 +75,7 @@ export function Sidebar({ isOpen, onClose }) {
       </AnimatePresence>
       <aside
         className={cn(
-          'fixed left-0 top-0 z-50 h-full w-[280px] max-w-[85vw] overflow-y-auto bg-card border-r border-border shadow-xl transition-transform duration-300 lg:hidden',
+          'fixed left-0 top-0 z-50 h-full w-[280px] max-w-[85vw] overflow-y-auto bg-card border-r border-border shadow-xl transition-transform duration-300 lg:hidden pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
