@@ -239,8 +239,8 @@ export const createProduct = asyncHandler(async (req, res) => {
     images, isFeatured,
   } = req.body;
 
-  if (!images || images.length < 3) {
-    throw new AppError('At least 3 product images are required', 422, 'MIN_IMAGES');
+  if (!images || images.length === 0) {
+    throw new AppError('At least 1 product image is required', 422, 'MIN_IMAGES');
   }
 
   const finalSku = await ensureUniqueSku(sku?.trim() || generateSku());
@@ -273,8 +273,8 @@ export const updateProduct = asyncHandler(async (req, res) => {
     images, isFeatured, isActive,
   } = req.body;
 
-  if (images && images.length < 3) {
-    throw new AppError('At least 3 product images are required', 422, 'MIN_IMAGES');
+  if (images && images.length === 0) {
+    throw new AppError('At least 1 product image is required', 422, 'MIN_IMAGES');
   }
 
   const data = {
