@@ -334,20 +334,22 @@ model FlashSaleItem {
   @@index([flashSaleId])
 }
 
-// ───── Telegram Phone Verification ─────────────────────────────────────────
+// ───── Verification Sessions ─────────────────────────────────────────
 
 model VerificationSession {
   id        String   @id @default(uuid())
-  phone     String
+  phone     String?
   email     String?
   chatId    String?
   status    String   @default("PENDING")
   expiresAt DateTime
   createdAt DateTime @default(now())
+  type      String   @default("TELEGRAM") // "TELEGRAM", "EMAIL"
 
   otp OtpVerification?
 
   @@index([phone])
+  @@index([email])
   @@index([chatId])
 }
 

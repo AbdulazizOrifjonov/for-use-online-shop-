@@ -8,6 +8,9 @@ import {
   forgotPasswordSchema,
   resetPasswordSchema,
   googleAuthSchema,
+  emailRequestSchema,
+  verifyCodeSchema,
+  completeRegistrationSchema
 } from '../utils/validators.js';
 import {
   register,
@@ -16,6 +19,9 @@ import {
   forgotPassword,
   resetPassword,
   me,
+  requestEmailVerification,
+  verifyEmailOtp,
+  completeRegistration
 } from '../controllers/auth.controller.js';
 
 const router = Router();
@@ -29,6 +35,10 @@ const authLimiter = rateLimit({
 });
 
 router.post('/register', authLimiter, validateBody(registerSchema), register);
+router.post('/email/send-code', authLimiter, validateBody(emailRequestSchema), requestEmailVerification);
+router.post('/email/verify-code', authLimiter, validateBody(verifyCodeSchema), verifyEmailOtp);
+router.post('/complete-registration', authLimiter, validateBody(completeRegistrationSchema), completeRegistration);
+
 router.post('/login', authLimiter, validateBody(loginSchema), login);
 router.post('/google', authLimiter, validateBody(googleAuthSchema), googleAuth);
 router.post('/forgot-password', authLimiter, validateBody(forgotPasswordSchema), forgotPassword);

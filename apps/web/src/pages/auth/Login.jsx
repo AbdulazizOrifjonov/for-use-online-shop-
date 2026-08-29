@@ -73,8 +73,8 @@ export default function Login() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
         <div>
-          <label className="mb-1.5 block text-sm font-medium">{t('auth.username_or_email')}</label>
-          <Input {...register('identifier')} autoComplete="username" placeholder="email@example.com" />
+          <label className="mb-1.5 block text-sm font-medium">Email, Login yoki Telefon</label>
+          <Input {...register('identifier')} autoComplete="username" placeholder="masalan: john_doe, email@gmail.com yoki +998901234567" />
           {errors.identifier && <p className="mt-1 text-xs text-destructive">{t('common.required_field')}</p>}
         </div>
 

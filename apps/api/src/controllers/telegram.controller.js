@@ -171,80 +171,16 @@ export const verifyOtpHandler = asyncHandler(async (req, res) => {
     }
   }
 
-  // OTP valid! Find or create user with flexible phone matching (EXCLUDING Super Admin 1234)
-  const rawPhone = (session.phone || '').replace(/\D/g, '');
-  const fullPhone = `+${rawPhone}`;
-  const last9 = rawPhone.slice(-9);
-  const normalizedEmail = session.email ? session.email.trim().toLowerCase() : undefined;
-
-  let user = await prisma.user.findFirst({
-    where: {
-      OR: [
-        { phone: fullPhone },
-        { phone: rawPhone },
-        { phone: { endsWith: last9 } },
-        { email: normalizedEmail || undefined },
-      ].filter(Boolean),
-      NOT: [
-        { username: '1234' },
-      ],
-    },
-  });
-
-  if (!user) {
-    try {
-      const rawName = normalizedEmail ? normalizedEmail.split('@')[0] : `User_${last9.slice(-4)}`;
-      const formattedName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
-
-      user = await prisma.user.create({
-        data: {
-          phone: fullPhone,
-          email: normalizedEmail || undefined,
-          name: formattedName,
-          passwordHash: '',
-          role: 'CUSTOMER',
-          adminLevel: null,
-        },
-      });
-    } catch (createErr) {
-      user = await prisma.user.findFirst({
-        where: {
-          OR: [
-            { phone: fullPhone },
-            { phone: rawPhone },
-            { phone: { endsWith: last9 } },
-          ],
-        },
-      });
-      if (!user) throw createErr;
-    }
-  } else {
-    const updates = {};
-    if (user.phone !== fullPhone) updates.phone = fullPhone;
-    if (!user.email && normalizedEmail) updates.email = normalizedEmail;
-    if (Object.keys(updates).length > 0) {
-      user = await prisma.user.update({ where: { id: user.id }, data: updates });
-    }
-  }
-
-  // Mark session completed
+  // OTP valid!
+  await prisma.otpVerification.update({ where: { sessionId }, data: { verified: true } });
+  
+  // Mark session verified instead of completed (so they can proceed to completeRegistration)
   await prisma.verificationSession.update({
     where: { id: sessionId },
-    data: { status: 'COMPLETED' },
-  });
-
-  // Provision cart and wishlist
-  await provisionCartAndWishlist(user.id);
-
-  const token = signToken({
-    id: user.id,
-    sub: user.id,
-    role: user.role,
-    adminLevel: user.adminLevel,
+    data: { status: 'VERIFIED' },
   });
 
   res.json({
-    token,
-    user: publicUser(user),
+    message: 'Kod tasdiqlandi. Endi login va parol yarating.',
   });
 });
