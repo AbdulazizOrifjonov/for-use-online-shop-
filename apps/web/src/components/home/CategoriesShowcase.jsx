@@ -10,31 +10,39 @@ export function CategoriesShowcase() {
 
   return (
     <section className="mt-8">
-      <h2 className="mb-3 text-lg font-bold sm:text-xl">{t('home.categories')}</h2>
+      <h2 className="mb-4 text-lg font-bold sm:text-xl">{t('home.categories')}</h2>
       {isLoading ? (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Skeleton key={i} className="h-18 rounded-2xl" />
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <Skeleton key={i} className="aspect-[4/5] rounded-2xl" />
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
           {categories.map((cat) => (
             <Link
               key={cat.id}
               to={`/catalog?category=${cat.slug}`}
-              className="group flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/5 hover:shadow-md"
+              className="group flex flex-col items-center overflow-hidden rounded-2xl bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-md border border-border/50"
             >
-              {cat.imageUrl ? (
-                <img src={cat.imageUrl} alt="" className="h-12 w-12 shrink-0 object-contain transition-transform group-hover:scale-105" />
-              ) : (
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-lg font-bold text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  {localizedField(cat, 'name', i18n.language)[0]}
-                </div>
-              )}
-              <span className="line-clamp-2 flex-1 text-xs font-semibold sm:text-sm transition-colors group-hover:text-primary">
-                {localizedField(cat, 'name', i18n.language)}
-              </span>
+              <div className="relative w-full aspect-[4/3] bg-muted/30 overflow-hidden">
+                {cat.imageUrl ? (
+                  <img 
+                    src={cat.imageUrl} 
+                    alt={localizedField(cat, 'name', i18n.language)} 
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" 
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-3xl font-bold text-primary/20 transition-colors group-hover:bg-primary/5 group-hover:text-primary/30">
+                    {localizedField(cat, 'name', i18n.language)[0]}
+                  </div>
+                )}
+              </div>
+              <div className="flex w-full items-center justify-center p-3 text-center">
+                <span className="line-clamp-2 text-xs font-semibold sm:text-sm transition-colors group-hover:text-primary">
+                  {localizedField(cat, 'name', i18n.language)}
+                </span>
+              </div>
             </Link>
           ))}
         </div>

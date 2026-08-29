@@ -6,6 +6,7 @@ import { ChevronDown, ChevronRight, X } from 'lucide-react';
 import { useCategoryTree } from '@/hooks/useCategoryTree';
 import { localizedField } from '@/lib/localize';
 import { cn } from '@/lib/utils';
+import { Logo } from '@/components/layout/Logo';
 
 function CategoryNode({ category, depth, onNavigate }) {
   const { i18n } = useTranslation();
@@ -14,15 +15,15 @@ function CategoryNode({ category, depth, onNavigate }) {
   const name = localizedField(category, 'name', i18n.language);
 
   return (
-    <div>
-      <div
-        className="flex items-center justify-between rounded-md hover:bg-accent transition-colors"
-        style={{ paddingLeft: `${depth * 12}px` }}
-      >
+    <div className={cn(depth === 0 ? 'border-b border-border/50 last:border-0' : '')}>
+      <div className="flex items-center justify-between transition-colors hover:bg-accent/50">
         <Link
           to={`/catalog?category=${category.slug}`}
           onClick={onNavigate}
-          className="flex-1 px-2 py-2 text-sm text-foreground/90"
+          className={cn(
+            "flex-1 py-4",
+            depth === 0 ? "px-4 text-[15px] font-bold text-foreground" : "py-3 pl-8 text-sm font-medium text-foreground/80"
+          )}
         >
           {name}
         </Link>
@@ -30,10 +31,10 @@ function CategoryNode({ category, depth, onNavigate }) {
           <button
             type="button"
             aria-label="toggle"
-            className="p-2 text-muted-foreground"
+            className={cn("p-4 text-muted-foreground transition-colors hover:text-primary", depth > 0 && "py-3")}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+            {open ? <ChevronDown className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
           </button>
         )}
       </div>
@@ -44,11 +45,13 @@ function CategoryNode({ category, depth, onNavigate }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden"
+            className="overflow-hidden bg-muted/20"
           >
-            {category.children.map((child) => (
-              <CategoryNode key={child.id} category={child} depth={depth + 1} onNavigate={onNavigate} />
-            ))}
+            <div className={cn(depth === 0 && "pb-2")}>
+              {category.children.map((child) => (
+                <CategoryNode key={child.id} category={child} depth={depth + 1} onNavigate={onNavigate} />
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -68,32 +71,49 @@ export function Sidebar({ isOpen, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-[2px] lg:hidden"
             onClick={onClose}
           />
         )}
       </AnimatePresence>
       <aside
         className={cn(
-          'fixed left-0 top-0 z-50 h-full w-[280px] max-w-[85vw] overflow-y-auto bg-card border-r border-border shadow-xl transition-transform duration-300 lg:hidden pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
+          'fixed inset-y-0 left-0 z-50 flex h-svh w-[85vw] max-w-[340px] flex-col bg-background shadow-2xl transition-transform duration-300 lg:hidden pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        <div className="flex items-center justify-between border-b border-border p-4">
-          <span className="font-semibold">{t('nav.categories')}</span>
-          <button onClick={onClose} aria-label="close sidebar">
+        <div className="flex shrink-0 items-center justify-between border-b border-border/60 px-4 py-3.5">
+          <Logo size={36} />
+          <button 
+            onClick={onClose} 
+            aria-label="close sidebar" 
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-muted/60 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:scale-95"
+          >
             <X className="h-5 w-5" />
           </button>
         </div>
-        <nav className="p-3">
-          {isLoading && <div className="px-2 py-2 text-sm text-muted-foreground">{t('common.loading')}</div>}
-          {!isLoading && categories.length === 0 && (
-            <div className="px-2 py-2 text-sm text-muted-foreground">{t('common.no_results')}</div>
+        
+        <div className="flex-1 overflow-y-auto">
+          {isLoading && (
+            <div className="flex flex-col">
+              {[1, 2, 3, 4, 5, 6].map(i => (
+                <div key={i} className="flex h-[56px] items-center border-b border-border/50 px-4">
+                  <div className="h-5 w-3/4 animate-pulse rounded-md bg-muted" />
+                </div>
+              ))}
+            </div>
           )}
-          {categories.map((cat) => (
-            <CategoryNode key={cat.id} category={cat} depth={0} onNavigate={onClose} />
-          ))}
-        </nav>
+          {!isLoading && categories.length === 0 && (
+            <div className="p-6 text-center text-sm text-muted-foreground">{t('common.no_results')}</div>
+          )}
+          {!isLoading && categories.length > 0 && (
+            <div className="flex flex-col pb-6">
+              {categories.map((cat) => (
+                <CategoryNode key={cat.id} category={cat} depth={0} onNavigate={onClose} />
+              ))}
+            </div>
+          )}
+        </div>
       </aside>
     </>
   );

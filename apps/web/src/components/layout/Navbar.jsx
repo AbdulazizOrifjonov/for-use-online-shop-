@@ -45,10 +45,10 @@ export function Navbar({ onMenuClick }) {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-primary/20 bg-background/95 shadow-sm backdrop-blur-xl pt-[env(safe-area-inset-top)]">
+    <header className="sticky top-0 z-30 border-b border-primary/10 bg-background/80 shadow-sm backdrop-blur-xl pt-[env(safe-area-inset-top)] transition-colors duration-300">
       <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-2 px-3 sm:px-4 lg:px-6">
         <button
-          className="rounded-lg p-2 hover:bg-accent lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/5 text-primary hover:bg-primary/10 active:scale-95 transition-all lg:hidden"
           onClick={onMenuClick}
           aria-label="open menu"
         >
@@ -74,9 +74,9 @@ export function Navbar({ onMenuClick }) {
           <SearchBox />
         </div>
 
-        <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
+        <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
           <button
-            className="rounded-lg p-2 hover:bg-accent sm:hidden"
+            className="flex rounded-full bg-primary/5 p-2 text-primary hover:bg-primary/10 active:scale-95 transition-all sm:hidden"
             onClick={() => setMobileSearchOpen((v) => !v)}
             aria-label="search"
           >
@@ -85,7 +85,7 @@ export function Navbar({ onMenuClick }) {
 
           <button
             onClick={toggleTheme}
-            className="hidden rounded-lg p-2 hover:bg-accent sm:flex"
+            className="flex rounded-full bg-primary/5 p-2 text-primary hover:bg-primary/10 active:scale-95 transition-all"
             aria-label="toggle theme"
           >
             {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
@@ -93,7 +93,7 @@ export function Navbar({ onMenuClick }) {
 
           <LanguageSwitcher />
 
-          <Link to="/compare" className={cn('relative hidden rounded-lg p-2 sm:flex', location.pathname === '/compare' ? 'bg-primary text-primary-foreground' : 'hover:bg-primary/10 hover:text-primary')} aria-label={t('nav.compare')}>
+          <Link to="/compare" className={cn('relative hidden rounded-full p-2 transition-all active:scale-95 sm:flex', location.pathname === '/compare' ? 'bg-primary text-primary-foreground' : 'bg-primary/5 text-primary hover:bg-primary/10')} aria-label={t('nav.compare')}>
             <GitCompareArrows className="h-5 w-5" />
             {compareCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
@@ -102,7 +102,7 @@ export function Navbar({ onMenuClick }) {
             )}
           </Link>
 
-          <Link to="/wishlist" className={cn('relative hidden sm:flex rounded-lg p-2', location.pathname === '/wishlist' ? 'bg-primary text-primary-foreground' : 'hover:bg-primary/10 hover:text-primary')} aria-label={t('nav.wishlist')}>
+          <Link to="/wishlist" className={cn('relative hidden rounded-full p-2 transition-all active:scale-95 sm:flex', location.pathname === '/wishlist' ? 'bg-primary text-primary-foreground' : 'bg-primary/5 text-primary hover:bg-primary/10')} aria-label={t('nav.wishlist')}>
             <Heart className="h-5 w-5" />
             {wishlistCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
@@ -111,7 +111,7 @@ export function Navbar({ onMenuClick }) {
             )}
           </Link>
 
-          <Link to="/cart" className={cn('relative hidden sm:flex rounded-lg p-2', location.pathname === '/cart' ? 'bg-primary text-primary-foreground' : 'hover:bg-primary/10 hover:text-primary')} aria-label={t('nav.cart')}>
+          <Link to="/cart" className={cn('relative hidden rounded-full p-2 transition-all active:scale-95 sm:flex', location.pathname === '/cart' ? 'bg-primary text-primary-foreground' : 'bg-primary/5 text-primary hover:bg-primary/10')} aria-label={t('nav.cart')}>
             <ShoppingCart className="h-5 w-5" />
             {cartCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
