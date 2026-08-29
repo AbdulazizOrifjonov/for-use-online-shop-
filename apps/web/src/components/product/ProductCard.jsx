@@ -133,7 +133,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
   return (
     <Link
       to={`/product/${product.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5"
+      className="group/card relative flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5"
       draggable={false}
       onDragStart={(e) => e.preventDefault()}
     >
@@ -163,7 +163,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
                     alt={name}
                     loading="lazy"
                     draggable={false}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 pointer-events-none"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-110 pointer-events-none"
                   />
                 </div>
               ))}
@@ -179,7 +179,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
                       scrollRef.current.scrollBy({ left: -scrollRef.current.clientWidth, behavior: 'smooth' });
                     }
                   }}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/70 shadow-sm backdrop-blur opacity-0 transition-opacity group-hover:opacity-100 hover:bg-white text-black z-20"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/70 shadow-sm backdrop-blur opacity-0 transition-opacity group-hover/card:opacity-100 hover:bg-white text-black z-20"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
@@ -191,7 +191,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
                       scrollRef.current.scrollBy({ left: scrollRef.current.clientWidth, behavior: 'smooth' });
                     }
                   }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/70 shadow-sm backdrop-blur opacity-0 transition-opacity group-hover:opacity-100 hover:bg-white text-black z-20"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/70 shadow-sm backdrop-blur opacity-0 transition-opacity group-hover/card:opacity-100 hover:bg-white text-black z-20"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -240,9 +240,11 @@ export const ProductCard = memo(function ProductCard({ product }) {
           </div>
         )}
 
-        <div className="mt-auto flex flex-wrap items-baseline gap-1.5">
+        <div className="mt-auto flex flex-col gap-0.5 min-h-[40px] justify-end">
           <span className="text-sm font-bold sm:text-base text-destructive">{formatUZS(currentPrice)}</span>
-          <span className="text-xs text-muted-foreground line-through">{formatUZS(oldPrice)}</span>
+          <span className="text-[11px] text-muted-foreground line-through h-[14px]">
+            {discountPercent > 0 ? formatUZS(oldPrice) : ''}
+          </span>
         </div>
 
         <div className="mt-1.5" onClick={(e) => e.preventDefault()}>
