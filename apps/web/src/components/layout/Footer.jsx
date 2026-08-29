@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Logo } from '../Logo';
+import { Logo } from './Logo';
 
 const UzcardLogo = () => <img src="https://uzcard.uz/images/logo.png" alt="Uzcard" className="h-5 object-contain" />;
 const HumoLogo = () => <img src="/logos/humo.png" alt="Humo" className="h-4 object-contain" />;
