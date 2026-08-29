@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
-import { ProductGrid } from '@/components/product/ProductGrid';
+import { ProductCarousel } from '@/components/product/ProductCarousel';
 
 export function ProductRail({ title, endpoint }) {
   const [products, setProducts] = useState([]);
@@ -28,8 +28,8 @@ export function ProductRail({ title, endpoint }) {
 
   return (
     <section className="mt-8">
-      <h2 className="mb-3 text-lg font-bold sm:text-xl">{title}</h2>
-      <ProductGrid products={products} isLoading={isLoading} />
+      <h2 className="mb-4 text-xl font-bold sm:text-2xl text-[#1f2937]">{title}</h2>
+      <ProductCarousel products={products} isLoading={isLoading} />
     </section>
   );
 }
