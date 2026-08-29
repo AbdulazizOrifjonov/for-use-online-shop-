@@ -157,13 +157,13 @@ export const ProductCard = memo(function ProductCard({ product }) {
               }}
             >
               {images.map((img, i) => (
-                <div key={i} className="h-full w-full shrink-0 snap-center relative">
+                <div key={i} className="h-full w-full shrink-0 snap-center relative overflow-hidden">
                   <img
                     src={img.url}
                     alt={name}
                     loading="lazy"
                     draggable={false}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 pointer-events-none"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 pointer-events-none"
                   />
                 </div>
               ))}

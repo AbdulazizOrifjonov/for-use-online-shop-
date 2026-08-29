@@ -46,6 +46,22 @@ const CATEGORY_TREE = [
       { nameUz: 'Operativ xotira', nameRu: 'Оперативная память', nameEn: 'RAM' },
     ],
   },
+  {
+    nameUz: 'Smartfonlar', nameRu: 'Смартфоны', nameEn: 'Smartphones',
+    imageUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800',
+    children: [
+      { nameUz: 'Flagmanlar', nameRu: 'Флагманы', nameEn: 'Flagships' },
+      { nameUz: 'Byudjet', nameRu: 'Бюджетные', nameEn: 'Budget' },
+    ],
+  },
+  {
+    nameUz: 'Planshetlar', nameRu: 'Планшеты', nameEn: 'Tablets',
+    imageUrl: 'https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=800',
+    children: [
+      { nameUz: 'Kattalar uchun', nameRu: 'Для взрослых', nameEn: 'For adults' },
+      { nameUz: 'Bolalar uchun', nameRu: 'Для детей', nameEn: 'For kids' },
+    ],
+  },
 ];
 
 const BRANDS = ['ASUS', 'HP', 'Lenovo', 'Apple', 'MSI', 'Acer', 'Dell', 'Logitech', 'Razer', 'Samsung', 'HyperX'];
