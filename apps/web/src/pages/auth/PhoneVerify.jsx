@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { OtpInput } from '@/components/ui/otp-input';
+
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/authStore';
 import { useCountdown } from '@/hooks/useCountdown';
@@ -306,12 +306,20 @@ export default function PhoneVerify() {
 
       {step === STEPS.OTP && (
         <div className="space-y-5">
-          <div className="flex flex-col items-center gap-2 rounded-xl bg-primary/5 p-4 text-center">
-            <ShieldCheck className="h-8 w-8 text-primary" />
-            <p className="text-sm">Kod <b>Telegram</b> botdan yuborildi.</p>
-          </div>
-          <OtpInput value={otp} onChange={setOtp} disabled={isLoading} />
-          {otpError && <p className="text-center text-sm text-destructive">{otpError}</p>}
+            <div className="flex flex-col items-center justify-center gap-2 rounded-xl bg-primary/5 py-4">
+              <ShieldCheck className="h-8 w-8 text-primary" />
+              <p className="text-sm">Kod <b>Telegram</b> botdan yuborildi.</p>
+            </div>
+            <Input 
+              type="text" 
+              maxLength={6} 
+              value={otp} 
+              onChange={(e) => setOtp(e.target.value.replace(/[^0-9]/g, ''))} 
+              disabled={isLoading} 
+              placeholder="0 0 0 0 0 0" 
+              className="text-center tracking-[1em] text-lg font-mono font-bold" 
+            />
+            {otpError && <p className="text-center text-sm text-destructive">{otpError}</p>}
           <Button className="w-full gap-2" onClick={() => handleVerifyOtp(otp)} disabled={otp.length !== 6 || isLoading}>
             {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle2 className="h-4 w-4" />} Tasdiqlash
           </Button>
