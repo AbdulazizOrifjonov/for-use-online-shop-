@@ -165,11 +165,21 @@ export const getSimilarProducts = asyncHandler(async (req, res) => {
   const product = await prisma.product.findUnique({ where: { slug: req.params.slug } });
   if (!product) throw new AppError('Product not found', 404, 'NOT_FOUND');
 
-  const products = await prisma.product.findMany({
+  let products = await prisma.product.findMany({
     where: { categoryId: product.categoryId, id: { not: product.id }, isActive: true },
     include: PRODUCT_INCLUDE,
     take: 8,
   });
+
+  if (products.length < 4) {
+    const more = await prisma.product.findMany({
+      where: { id: { notIn: [product.id, ...products.map((p) => p.id)] }, isActive: true },
+      include: PRODUCT_INCLUDE,
+      take: 8 - products.length,
+    });
+    products = [...products, ...more];
+  }
+
   res.json({ products: await attachRatings(products) });
 });
 
@@ -177,7 +187,7 @@ export const getRelatedProducts = asyncHandler(async (req, res) => {
   const product = await prisma.product.findUnique({ where: { slug: req.params.slug } });
   if (!product) throw new AppError('Product not found', 404, 'NOT_FOUND');
 
-  const products = await prisma.product.findMany({
+  let products = await prisma.product.findMany({
     where: {
       brandId: product.brandId || undefined,
       id: { not: product.id },
@@ -186,6 +196,16 @@ export const getRelatedProducts = asyncHandler(async (req, res) => {
     include: PRODUCT_INCLUDE,
     take: 8,
   });
+
+  if (products.length < 4) {
+    const more = await prisma.product.findMany({
+      where: { id: { notIn: [product.id, ...products.map((p) => p.id)] }, isActive: true },
+      include: PRODUCT_INCLUDE,
+      take: 8 - products.length,
+    });
+    products = [...products, ...more];
+  }
+
   res.json({ products: await attachRatings(products) });
 });
 
@@ -199,23 +219,35 @@ export const getFrequentlyBoughtTogether = asyncHandler(async (req, res) => {
   });
   const orderIds = coOrders.map((o) => o.orderId);
 
-  if (orderIds.length === 0) return res.json({ products: [] });
+  let products = [];
+  if (orderIds.length > 0) {
+    const coItems = await prisma.orderItem.findMany({
+      where: { orderId: { in: orderIds }, productId: { not: product.id } },
+      select: { productId: true },
+    });
 
-  const coItems = await prisma.orderItem.findMany({
-    where: { orderId: { in: orderIds }, productId: { not: product.id } },
-    select: { productId: true },
-  });
+    const counts = new Map();
+    for (const item of coItems) counts.set(item.productId, (counts.get(item.productId) || 0) + 1);
 
-  const counts = new Map();
-  for (const item of coItems) counts.set(item.productId, (counts.get(item.productId) || 0) + 1);
+    const topIds = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([id]) => id);
 
-  const topIds = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([id]) => id);
-  if (topIds.length === 0) return res.json({ products: [] });
+    if (topIds.length > 0) {
+      products = await prisma.product.findMany({
+        where: { id: { in: topIds }, isActive: true },
+        include: PRODUCT_INCLUDE,
+      });
+    }
+  }
 
-  const products = await prisma.product.findMany({
-    where: { id: { in: topIds }, isActive: true },
-    include: PRODUCT_INCLUDE,
-  });
+  if (products.length < 4) {
+    const more = await prisma.product.findMany({
+      where: { id: { notIn: [product.id, ...products.map((p) => p.id)] }, isActive: true },
+      include: PRODUCT_INCLUDE,
+      take: 4 - products.length,
+    });
+    products = [...products, ...more];
+  }
+
   res.json({ products: await attachRatings(products) });
 });
 
