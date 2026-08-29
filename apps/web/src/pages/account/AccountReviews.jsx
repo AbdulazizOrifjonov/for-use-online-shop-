@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Star, Upload, X, ImageIcon, CheckCircle2, MessageSquare, Loader2, PackageCheck } from 'lucide-react';
+import { Star, Upload, X, ImageIcon, CheckCircle2, Loader2, PackageCheck } from 'lucide-react';
 import { toast } from 'sonner';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
@@ -13,10 +13,6 @@ export default function AccountReviews() {
 
   // Per-item review form states
   const [formStates, setFormStates] = useState({});
-
-  useEffect(() => {
-    fetchPending();
-  }, []);
 
   function fetchPending() {
     setIsLoading(true);
@@ -44,6 +40,11 @@ export default function AccountReviews() {
       .finally(() => setIsLoading(false));
   }
 
+  useEffect(() => {
+    fetchPending();
+  }, []);
+
+  
   function updateItemState(slug, updates) {
     setFormStates((prev) => ({
       ...prev,

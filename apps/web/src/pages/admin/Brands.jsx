@@ -34,7 +34,7 @@ export default function AdminBrands() {
  const [name, setName] = useState('');
  const [logoUrl, setLogoUrl] = useState('');
  const [saving, setSaving] = useState(false);
- const initialValues = useRef({ name: '', logoUrl: '' });
+ const [initialValues, setInitialValues] = useState({ name: '', logoUrl: '' });
  const modalRef = useRef(null);
 
  function load() {
@@ -48,7 +48,7 @@ export default function AdminBrands() {
  setEditBrand(null);
  setName('');
  setLogoUrl('');
- initialValues.current = { name: '', logoUrl: '' };
+ setInitialValues({ name: '', logoUrl: '' });
  setShowModal(true);
  }
 
@@ -56,7 +56,7 @@ export default function AdminBrands() {
  setEditBrand(brand);
  setName(brand.name);
  setLogoUrl(brand.logoUrl || '');
- initialValues.current = { name: brand.name, logoUrl: brand.logoUrl || '' };
+ setInitialValues({ name: brand.name, logoUrl: brand.logoUrl || '' });
  setShowModal(true);
  }
 
@@ -67,7 +67,7 @@ export default function AdminBrands() {
  setEditBrand(null);
  }
 
- const hasUnsavedChanges = name !== initialValues.current.name || logoUrl !== initialValues.current.logoUrl;
+ const hasUnsavedChanges = name !== initialValues.name || logoUrl !== initialValues.logoUrl;
 
  async function handleSave() {
  if (!name.trim()) { toast.error('Nomi talab qilinadi'); return; }

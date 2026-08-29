@@ -20,7 +20,7 @@ function setGuestCart(cart) {
   }
 }
 
-export const useCartStore = create((set, get) => ({
+export const useCartStore = create((set) => ({
   cart: getGuestCart(),
   isLoading: false,
 
