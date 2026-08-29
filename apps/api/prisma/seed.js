@@ -53,35 +53,67 @@ const BRANDS = ['ASUS', 'HP', 'Lenovo', 'Apple', 'MSI', 'Acer', 'Dell', 'Logitec
 const PRODUCT_TEMPLATES = [
   {
     name: 'ROG Strix G16', cat: 'Gaming Laptops', brand: 'ASUS', price: 18500000,
-    images: ['https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800']
+    images: [
+      'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800',
+      'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800',
+      'https://images.unsplash.com/photo-1593642702821-c823b2816934?w=800'
+    ]
   },
   {
     name: 'MacBook Pro 14 M3', cat: 'Ultrabooks', brand: 'Apple', price: 24000000,
-    images: ['https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800']
+    images: [
+      'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800',
+      'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800',
+      'https://images.unsplash.com/photo-1516387938699-a93567ec168e?w=800'
+    ]
   },
   {
     name: 'ThinkPad X1 Carbon', cat: 'Business Laptops', brand: 'Lenovo', price: 19800000,
-    images: ['https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800']
+    images: [
+      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800',
+      'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800',
+      'https://images.unsplash.com/photo-1618424181497-157f25b6ce5e?w=800'
+    ]
   },
   {
     name: 'Gaming Mouse G502', cat: 'Mice', brand: 'Logitech', price: 850000,
-    images: ['https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800']
+    images: [
+      'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800',
+      'https://images.unsplash.com/photo-1615663245857-ac93bb7c399c?w=800',
+      'https://images.unsplash.com/photo-1586816879360-004f5b0c51e3?w=800'
+    ]
   },
   {
     name: 'Mechanical Keyboard BlackWidow', cat: 'Keyboards', brand: 'Razer', price: 1650000,
-    images: ['https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800']
+    images: [
+      'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800',
+      'https://images.unsplash.com/photo-1595225476474-87563907a212?w=800',
+      'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800'
+    ]
   },
   {
     name: 'Odyssey G7 27"', cat: 'Monitors', brand: 'Samsung', price: 6500000,
-    images: ['https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800']
+    images: [
+      'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800', // Monitor
+      'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800',
+      'https://images.unsplash.com/photo-1551645120-d70bfe84c826?w=800'
+    ]
   },
   {
     name: 'Cloud II Wireless', cat: 'Headphones', brand: 'HyperX', price: 1450000,
-    images: ['https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800']
+    images: [
+      'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800',
+      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800',
+      'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800'
+    ]
   },
   {
     name: 'RTX 4090 24GB', cat: 'Video Cards', brand: 'ASUS', price: 28000000,
-    images: ['https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800']
+    images: [
+      'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800',
+      'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800',
+      'https://images.unsplash.com/photo-1658428886367-e95e86d26732?w=800'
+    ]
   },
 ];
 

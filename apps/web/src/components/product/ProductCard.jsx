@@ -29,10 +29,22 @@ export const ProductCard = memo(function ProductCard({ product }) {
 
   const name = localizedField(product, 'name', i18n.language);
   const image = product.images?.[0]?.url;
-  const hasDiscount = Boolean(product.discountPrice);
-  const discountPercent = hasDiscount
-    ? Math.round(100 - (product.discountPrice / product.price) * 100)
-    : 0;
+  
+  // Consistent random percentage based on product ID (10% to 15%)
+  const idHash = product.id ? product.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0;
+  const fakePercent = (idHash % 6) + 10;
+  
+  const hasRealDiscount = Boolean(product.discountPrice);
+  
+  // Current selling price is either real discountPrice or price
+  const currentPrice = hasRealDiscount ? product.discountPrice : product.price;
+  // Old crossed-out price is either original price, or fake higher price
+  const oldPrice = hasRealDiscount 
+    ? product.price 
+    : Math.round(product.price * (1 + fakePercent / 100));
+    
+  const discountPercent = Math.round(100 - (currentPrice / oldPrice) * 100);
+  
   const outOfStock = product.stock <= 0;
 
   const images = product.images || [];
@@ -142,7 +154,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
         )}
 
         <div className="absolute left-2 top-2 z-10 flex flex-col gap-1 pointer-events-none">
-          {hasDiscount && <Badge>-{discountPercent}%</Badge>}
+          {discountPercent > 0 && <Badge className="bg-destructive text-destructive-foreground hover:bg-destructive/90">-{discountPercent}%</Badge>}
           {outOfStock && <Badge variant="secondary">{t('product.out_of_stock')}</Badge>}
         </div>
 
@@ -168,10 +180,8 @@ export const ProductCard = memo(function ProductCard({ product }) {
         )}
 
         <div className="mt-auto flex flex-wrap items-baseline gap-1.5">
-          <span className="text-sm font-bold sm:text-base">{formatUZS(product.discountPrice ?? product.price)}</span>
-          {hasDiscount && (
-            <span className="text-xs text-muted-foreground line-through">{formatUZS(product.price)}</span>
-          )}
+          <span className="text-sm font-bold sm:text-base text-destructive">{formatUZS(currentPrice)}</span>
+          <span className="text-xs text-muted-foreground line-through">{formatUZS(oldPrice)}</span>
         </div>
 
         <div className="mt-1.5" onClick={(e) => e.preventDefault()}>
