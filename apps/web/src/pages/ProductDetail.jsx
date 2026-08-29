@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Star, ShoppingCart, Minus, Plus, Loader2, Share2, GitCompareArrows, Check, CreditCard } from 'lucide-react';
+import { Heart, Star, ShoppingCart, Minus, Plus, Loader2, Share2, GitCompareArrows, Check, CreditCard, Truck, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
@@ -259,7 +259,49 @@ export default function ProductDetail() {
             </div>
           </div>
 
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-card p-4 shadow-sm transition-shadow hover:shadow-md">
+              <div className="mb-3 flex items-center gap-2">
+                <CreditCard className="h-5 w-5 text-primary" />
+                <h3 className="text-sm font-semibold">{t('product.payment_methods', "To'lov turlari")}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <div className="flex h-8 items-center justify-center rounded bg-[#F2F2F2] px-3 border border-border/50">
+                  <span className="text-xs font-bold text-[#003B95]">Uzcard</span>
+                </div>
+                <div className="flex h-8 items-center justify-center rounded bg-[#F2F2F2] px-3 border border-border/50">
+                  <span className="text-xs font-bold text-[#F39200]">HUMO</span>
+                </div>
+                <div className="flex h-8 items-center justify-center rounded bg-[#F2F2F2] px-3 border border-border/50">
+                  <span className="text-xs font-bold text-[#1434CB] italic">Visa</span>
+                </div>
+                <div className="flex h-8 items-center justify-center rounded bg-primary/10 px-3 border border-primary/20">
+                  <span className="text-xs font-bold text-primary">{t('product.cash', 'Naqd pul')}</span>
+                </div>
+              </div>
+            </div>
 
+            <div className="rounded-2xl border border-border bg-card p-4 space-y-4 shadow-sm transition-shadow hover:shadow-md">
+              <div className="flex items-start gap-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <Truck className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold">{t('product.delivery_title', 'Yetkazib berish')}</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t('product.delivery_desc', "Butun O'zbekiston bo'ylab tezkor yetkazib berish")}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <ShieldCheck className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold">{t('product.warranty_title', 'Kafolat')}</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t('product.warranty_desc', "Rasmiy kafolat va xizmat ko'rsatish markazlari")}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>

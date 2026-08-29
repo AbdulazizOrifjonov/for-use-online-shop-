@@ -56,6 +56,12 @@
     "reset_email_sent": "If that email exists, a reset link has been sent"
   },
   "product": {
+    "payment_methods": "Payment methods",
+    "cash": "Cash",
+    "delivery_title": "Delivery",
+    "delivery_desc": "Fast delivery all over Uzbekistan",
+    "warranty_title": "Warranty",
+    "warranty_desc": "Official warranty and service centers",
     "add_to_cart": "Add to cart",
     "buy_now": "Buy now",
     "out_of_stock": "Out of stock",
@@ -186,5 +192,17 @@
     "monthly_sales": "Monthly sales",
     "orders_by_status": "Orders by status",
     "no_data_yet": "No data yet"
+  },
+  "header": {
+    "delivery_info": "Delivery: all over Uzbekistan",
+    "work_hours": "Mon–Sat: 09:00–19:00"
+  },
+  "footer": {
+    "about_title": "About us",
+    "about_text": "MarketPro is one of the largest online stores in Uzbekistan. We offer quality products and excellent service.",
+    "contact_title": "Contacts",
+    "address": "Tashkent, Yunusabad district, 19th quarter",
+    "phone": "+998 90 215 52 16",
+    "email": "info@marketpro.uz"
   }
 }

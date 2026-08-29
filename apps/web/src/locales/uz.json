@@ -56,14 +56,20 @@
     "reset_email_sent": "Agar email mavjud bo'lsa, tiklash havolasi yuborildi"
   },
   "footer": {
-    "about_title": "Professional Tools haqida",
-    "about_text": "Biz mijozlarimizga eng so'nggi va sifatli kompyuter texnikalarini, noutbuklar va aksessuarlarni hamyonbop narxlarda yetkazib beramiz.",
+    "about_title": "Biz haqimizda",
+    "about_text": "MarketPro - O'zbekistondagi eng yirik onlayn do'konlardan biri. Biz sifatli mahsulotlar va a'lo xizmat ko'rsatishni taklif etamiz.",
     "contact_title": "Aloqa",
-    "address": "Toshkent shahri, Yunusobod tumani",
-    "phone": "+998 71 123 45 67",
-    "email": "info@protools.uz"
+    "address": "Toshkent sh., Yunusobod tumani, 19-mavze",
+    "phone": "+998 90 215 52 16",
+    "email": "info@marketpro.uz"
   },
   "product": {
+    "payment_methods": "To'lov turlari",
+    "cash": "Naqd pul",
+    "delivery_title": "Yetkazib berish",
+    "delivery_desc": "Butun O'zbekiston bo'ylab tezkor yetkazib berish",
+    "warranty_title": "Kafolat",
+    "warranty_desc": "Rasmiy kafolat va xizmat ko'rsatish markazlari",
     "add_to_cart": "Savatchaga qo'shish",
     "buy_now": "Hozir sotib olish",
     "out_of_stock": "Mavjud emas",
@@ -194,5 +200,9 @@
     "monthly_sales": "Oylik savdo",
     "orders_by_status": "Buyurtmalar holati",
     "no_data_yet": "Hozircha ma'lumot yo'q"
+  },
+  "header": {
+    "delivery_info": "Yetkazib berish: butun O'zbekiston bo'ylab",
+    "work_hours": "Dush–Shanba: 09:00–19:00"
   }
 }
