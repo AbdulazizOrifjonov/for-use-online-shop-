@@ -1,8 +1,8 @@
-import { memo, useState } from 'react';
+import { memo, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Star, ShoppingCart, Minus, Plus, Loader2 } from 'lucide-react';
+import { Heart, Star, ShoppingCart, Minus, Plus, Loader2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -49,6 +49,31 @@ export const ProductCard = memo(function ProductCard({ product }) {
 
   const images = product.images || [];
   const [activeImage, setActiveImage] = useState(0);
+  const scrollRef = useRef(null);
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  const handlePointerDown = (e) => {
+    isDown = true;
+    if (scrollRef.current) {
+      startX = e.pageX - scrollRef.current.offsetLeft;
+      scrollLeft = scrollRef.current.scrollLeft;
+    }
+  };
+
+  const handlePointerUpOrLeave = () => {
+    isDown = false;
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDown || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
 
   function requireAuth() {
     if (!isAuthenticated) {
@@ -109,17 +134,24 @@ export const ProductCard = memo(function ProductCard({ product }) {
     <Link
       to={`/product/${product.slug}`}
       className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5"
+      draggable={false}
+      onDragStart={(e) => e.preventDefault()}
     >
       <div className="relative aspect-square w-full overflow-hidden bg-muted">
         {images.length > 0 ? (
           <>
             <div 
-              className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+              ref={scrollRef}
+              className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing"
+              onPointerDown={handlePointerDown}
+              onPointerLeave={handlePointerUpOrLeave}
+              onPointerUp={handlePointerUpOrLeave}
+              onPointerMove={handlePointerMove}
               onScroll={(e) => {
-                const scrollLeft = e.currentTarget.scrollLeft;
+                const sl = e.currentTarget.scrollLeft;
                 const width = e.currentTarget.clientWidth;
                 if (width > 0) {
-                  const index = Math.round(scrollLeft / width);
+                  const index = Math.round(sl / width);
                   if (index !== activeImage) setActiveImage(index);
                 }
               }}
@@ -130,23 +162,52 @@ export const ProductCard = memo(function ProductCard({ product }) {
                     src={img.url}
                     alt={name}
                     loading="lazy"
+                    draggable={false}
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 pointer-events-none"
                   />
                 </div>
               ))}
             </div>
+
             {images.length > 1 && (
-              <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 px-2 pointer-events-none z-10">
-                {images.map((_, idx) => (
-                  <div
-                    key={idx}
-                    className={cn(
-                      "h-1 rounded-full transition-all duration-300 shadow-sm",
-                      activeImage === idx ? "w-4 bg-primary" : "w-1.5 bg-white/70 dark:bg-black/50"
-                    )}
-                  />
-                ))}
-              </div>
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (scrollRef.current) {
+                      scrollRef.current.scrollBy({ left: -scrollRef.current.clientWidth, behavior: 'smooth' });
+                    }
+                  }}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/70 shadow-sm backdrop-blur opacity-0 transition-opacity group-hover:opacity-100 hover:bg-white text-black z-20"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (scrollRef.current) {
+                      scrollRef.current.scrollBy({ left: scrollRef.current.clientWidth, behavior: 'smooth' });
+                    }
+                  }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/70 shadow-sm backdrop-blur opacity-0 transition-opacity group-hover:opacity-100 hover:bg-white text-black z-20"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+
+                <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 px-2 pointer-events-none z-10">
+                  {images.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={cn(
+                        "h-1 rounded-full transition-all duration-300 shadow-sm",
+                        activeImage === idx ? "w-4 bg-primary" : "w-1.5 bg-white/70 dark:bg-black/50"
+                      )}
+                    />
+                  ))}
+                </div>
+              </>
             )}
           </>
         ) : (

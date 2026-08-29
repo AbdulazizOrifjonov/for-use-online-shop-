@@ -26,6 +26,7 @@ export function ImageLightbox({ images, index, onIndexChange, onClose }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-[100] flex flex-col bg-black/95"
+        onClick={onClose}
       >
         <button
           onClick={onClose}
@@ -35,10 +36,10 @@ export function ImageLightbox({ images, index, onIndexChange, onClose }) {
           <X className="h-5 w-5" />
         </button>
 
-        <div className="relative flex flex-1 items-center justify-center px-4 sm:px-16">
+        <div className="relative flex flex-1 items-center justify-center px-4 sm:px-16" onClick={onClose}>
           {images.length > 1 && (
             <button
-              onClick={() => onIndexChange((index - 1 + images.length) % images.length)}
+              onClick={(e) => { e.stopPropagation(); onIndexChange((index - 1 + images.length) % images.length); }}
               aria-label="previous"
               className="absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:left-4"
             >
@@ -59,6 +60,7 @@ export function ImageLightbox({ images, index, onIndexChange, onClose }) {
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.4}
+              onClick={(e) => e.stopPropagation()}
               onDragEnd={(e, { offset }) => {
                 if (offset.x < -50) {
                   onIndexChange((index + 1) % images.length);
@@ -71,7 +73,7 @@ export function ImageLightbox({ images, index, onIndexChange, onClose }) {
 
           {images.length > 1 && (
             <button
-              onClick={() => onIndexChange((index + 1) % images.length)}
+              onClick={(e) => { e.stopPropagation(); onIndexChange((index + 1) % images.length); }}
               aria-label="next"
               className="absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:right-4"
             >
@@ -81,11 +83,11 @@ export function ImageLightbox({ images, index, onIndexChange, onClose }) {
         </div>
 
         {images.length > 1 && (
-          <div className="flex justify-center gap-2 overflow-x-auto p-4">
+          <div className="flex justify-center gap-2 overflow-x-auto p-4" onClick={(e) => e.stopPropagation()}>
             {images.map((url, i) => (
               <button
                 key={url + i}
-                onClick={() => onIndexChange(i)}
+                onClick={(e) => { e.stopPropagation(); onIndexChange(i); }}
                 className={cn(
                   'h-14 w-14 shrink-0 overflow-hidden rounded-lg border-2 transition-opacity',
                   i === index ? 'border-white opacity-100' : 'border-transparent opacity-50 hover:opacity-80'

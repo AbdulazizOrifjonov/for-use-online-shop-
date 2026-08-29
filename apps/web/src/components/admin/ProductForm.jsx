@@ -132,8 +132,12 @@ export function ProductForm({ product, onSaved, onCancel }) {
       setError("Tavsif uchun rus va ingliz tarjimalari kerak");
       return;
     }
-    if (form.images.length < 3) {
-      setError('Kamida 3 ta rasm kerak');
+    if (!form.categoryId) {
+      setError('Kategoriya tanlang');
+      return;
+    }
+    if (form.images.length === 0) {
+      setError('Kamida 1 ta rasm kerak');
       return;
     }
     const salePrice = parseFloat(form.salePrice);
@@ -254,8 +258,8 @@ export function ProductForm({ product, onSaved, onCancel }) {
         <VideoUploader folder="products" value={form.videoUrl} onChange={(videoUrl) => setForm({ ...form, videoUrl })} />
       </Field>
 
-      <Field label="Rasmlar" hint="kamida 3 ta — fayl yuklang yoki havola qo'ying">
-        <ImageUploader folder="products" images={form.images} onChange={(images) => setForm({ ...form, images })} min={3} />
+      <Field label="Rasmlar" hint="kamida 1 ta — fayl yuklang yoki havola qo'ying">
+        <ImageUploader folder="products" images={form.images} onChange={(images) => setForm({ ...form, images })} min={1} />
       </Field>
 
       <Field label={t('product.specifications')} hint="masalan: Brend → Samsung, Rangi → Qora">
