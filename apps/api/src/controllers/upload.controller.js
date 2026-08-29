@@ -10,12 +10,14 @@ const UPLOAD_DIR = path.join(__dirname, '../../public/uploads');
 
 if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
-async function saveLocally(file, folder) {
+async function saveLocally(file, folder, req) {
   const dir = path.join(UPLOAD_DIR, folder);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`;
   fs.writeFileSync(path.join(dir, filename), file.buffer);
-  return { secure_url: `/uploads/${folder}/${filename}`, public_id: `${folder}/${filename}` };
+  
+  const baseUrl = `${req.protocol}://${req.get('host')}`;
+  return { secure_url: `${baseUrl}/uploads/${folder}/${filename}`, public_id: `${folder}/${filename}` };
 }
 
 export const uploadMedia = asyncHandler(async (req, res) => {
@@ -32,7 +34,7 @@ export const uploadMedia = asyncHandler(async (req, res) => {
   for (const file of req.files) {
     const result = isCloudinaryConfigured()
       ? await uploadBuffer(file.buffer, folder)
-      : await saveLocally(file, folder);
+      : await saveLocally(file, folder, req);
     results.push({ url: result.secure_url, publicId: result.public_id });
   }
 

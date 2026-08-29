@@ -18,6 +18,8 @@ export function VideoUploader({ folder, value, onChange }) {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       onChange(data.files[0]?.url || '');
+    } catch (err) {
+      import('sonner').then(({ toast }) => toast.error(err.friendlyMessage || "Video yuklashda xatolik yuz berdi"));
     } finally {
       setIsUploading(false);
       if (inputRef.current) inputRef.current.value = '';

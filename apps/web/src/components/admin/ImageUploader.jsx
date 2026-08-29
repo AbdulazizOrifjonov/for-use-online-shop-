@@ -22,6 +22,8 @@ export function ImageUploader({ folder, images, onChange, min = 0 }) {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       onChange([...images, ...data.files.map((f) => f.url)]);
+    } catch (err) {
+      import('sonner').then(({ toast }) => toast.error(err.friendlyMessage || "Rasm yuklashda xatolik yuz berdi"));
     } finally {
       setIsUploading(false);
       if (inputRef.current) inputRef.current.value = '';

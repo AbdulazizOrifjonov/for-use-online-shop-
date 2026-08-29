@@ -258,8 +258,8 @@ export function ProductForm({ product, onSaved, onCancel }) {
         <VideoUploader folder="products" value={form.videoUrl} onChange={(videoUrl) => setForm({ ...form, videoUrl })} />
       </Field>
 
-      <Field label="Rasmlar" hint="kamida 1 ta — fayl yuklang yoki havola qo'ying">
-        <ImageUploader folder="products" images={form.images} onChange={(images) => setForm({ ...form, images })} min={1} />
+      <Field label="Rasmlar" hint="kamida 3 ta — fayl yuklang yoki havola qo'ying">
+        <ImageUploader folder="products" images={form.images} onChange={(images) => setForm({ ...form, images })} min={3} />
       </Field>
 
       <Field label={t('product.specifications')} hint="masalan: Brend → Samsung, Rangi → Qora">
