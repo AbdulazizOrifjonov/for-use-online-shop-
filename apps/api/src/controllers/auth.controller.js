@@ -151,7 +151,7 @@ export const requestEmailVerification = asyncHandler(async (req, res) => {
   const normalizedEmail = email.trim().toLowerCase();
 
   const existing = await prisma.user.findUnique({ where: { email: normalizedEmail } });
-  if (existing) throw new AppError('Ushbu email ro\\'yxatdan o\\'tgan', 409, 'EMAIL_TAKEN');
+  if (existing) throw new AppError("Ushbu email ro'yxatdan o'tgan", 409, 'EMAIL_TAKEN');
 
   // Cancel any old pending sessions for this email
   await prisma.verificationSession.updateMany({
@@ -199,7 +199,7 @@ export const verifyEmailOtp = asyncHandler(async (req, res) => {
   const isValid = await verifyOtp(code, otpRecord.otpHash);
   if (!isValid) {
     await prisma.otpVerification.update({ where: { sessionId }, data: { attempts: { increment: 1 } } });
-    throw new AppError('Kod noto\\'g\\'ri', 400, 'INVALID_CODE');
+    throw new AppError("Kod noto'g'ri", 400, 'INVALID_CODE');
   }
 
   await prisma.otpVerification.update({ where: { sessionId }, data: { verified: true } });
@@ -213,7 +213,7 @@ export const completeRegistration = asyncHandler(async (req, res) => {
   const session = await prisma.verificationSession.findUnique({ where: { id: sessionId } });
 
   if (!session || session.status !== 'VERIFIED') {
-    throw new AppError('Oldin tasdiqlash jarayonidan o\\'ting', 400, 'NOT_VERIFIED');
+    throw new AppError("Oldin tasdiqlash jarayonidan o'ting", 400, 'NOT_VERIFIED');
   }
 
   const normalizedUsername = username.trim().toLowerCase();
