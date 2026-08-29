@@ -41,9 +41,9 @@ export const completeRegistrationSchema = z.object({
   username: z.string().min(3).max(30),
   password: z.string()
     .min(8)
-    .regex(/[A-Z]/, 'Katta harf bo''lishi shart')
-    .regex(/[a-z]/, 'Kichik harf bo''lishi shart')
-    .regex(/[0-9]/, 'Raqam bo''lishi shart')
-    .regex(/[^A-Za-z0-9]/, 'Maxsus belgi bo''lishi shart'),
+    .regex(/[A-Z]/, "Katta harf bo'lishi shart")
+    .regex(/[a-z]/, "Kichik harf bo'lishi shart")
+    .regex(/[0-9]/, "Raqam bo'lishi shart")
+    .regex(/[^A-Za-z0-9]/, "Maxsus belgi bo'lishi shart"),
 });
 
