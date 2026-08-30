@@ -1,8 +1,15 @@
+const fs = require('fs');
 
+const newFooter = `
 import { Link } from 'react-router-dom';
-import { Logo } from './Logo';
-import { UzcardLogo, HumoLogo, VisaLogo, MastercardLogo, ClickLogo, PaymeLogo } from '../PaymentLogos';
+import { Logo } from '../Logo';
 
+const UzcardLogo = () => <span className="font-bold text-white tracking-tight italic text-sm">UZCARD</span>;
+const HumoLogo = () => <span className="font-bold text-[#F2B705] tracking-tight text-sm">HUMO</span>;
+const VisaLogo = () => <span className="font-bold text-white italic tracking-tighter text-sm">VISA</span>;
+const ClickLogo = () => <span className="font-bold text-[#00A1E6] tracking-tight text-sm">CLICK</span>;
+const PaymeLogo = () => <span className="font-bold text-[#35C6A7] tracking-tight text-sm">Payme</span>;
+const MastercardLogo = () => (<div className="flex -space-x-1.5 items-center justify-center"><div className="w-4 h-4 rounded-full bg-[#EB001B] mix-blend-multiply"></div><div className="w-4 h-4 rounded-full bg-[#F79E1B] mix-blend-multiply"></div></div>);
 
 export function Footer() {
   return (
@@ -93,3 +100,6 @@ export function Footer() {
     </footer>
   );
 }
+`;
+
+fs.writeFileSync('src/components/layout/Footer.jsx', newFooter);

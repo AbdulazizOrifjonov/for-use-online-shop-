@@ -1,5 +1,5 @@
 // Central API Client for Professional Tools Mobile App
-const DEV_API_URL = 'http://192.168.137.1:5000/api';
+const DEV_API_URL = 'http://10.47.101.174:5000/api';
 
 export const API_BASE_URL = DEV_API_URL;
 

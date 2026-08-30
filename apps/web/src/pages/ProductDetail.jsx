@@ -21,16 +21,7 @@ import { useWishlistStore } from '@/store/wishlistStore';
 import { useCompareStore, MAX_COMPARE } from '@/store/compareStore';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
-// SVG Logos for Payment Methods
-const PaymeLogo = () => <img src="https://cdn.paycom.uz/logo/payme_color.svg" alt="Payme" className="h-5 object-contain" onError={(e) => { e.target.src="https://payme.uz/assets/images/logo.png" }} />;
-
-const ClickLogo = () => <img src="/logos/click.png" alt="Click" className="h-5 object-contain" />;
-
-const UzcardLogo = () => <img src="https://uzcard.uz/images/logo.png" alt="Uzcard" className="h-6 object-contain" />;
-
-const HumoLogo = () => <img src="/logos/humo.png" alt="Humo" className="h-5 object-contain" />;
-
-const VisaLogo = () => <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" className="h-4 object-contain" onError={(e) => { e.target.src="https://cdn.iconscout.com/icon/free/png-256/visa-3-225544.png" }} />;
+import { UzcardLogo, HumoLogo, VisaLogo, MastercardLogo, ClickLogo, PaymeLogo } from '@/components/PaymentLogos';
 
 export default function ProductDetail() {
   const { slug } = useParams();
