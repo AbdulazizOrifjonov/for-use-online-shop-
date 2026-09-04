@@ -19,7 +19,20 @@ export function ProductSection({ title, params, viewAllHref }) {
     setError(false);
     api
       .get('/products', { params: { limit: 10, ...params } })
-      .then(({ data }) => active && setProducts(data.products))
+      .then(({ data }) => {
+        if (active) {
+          let list = data.products || [];
+          // Fill space visually to avoid empty grid slots
+          if (list.length > 0 && list.length < 10) {
+            const original = [...list];
+            while (list.length < 10) {
+              list = [...list, ...original.map(p => ({ ...p, id: p.id + Math.random().toString() }))];
+            }
+            list = list.slice(0, 10);
+          }
+          setProducts(list);
+        }
+      })
       .catch(() => active && setError(true))
       .finally(() => active && setIsLoading(false));
     return () => {
