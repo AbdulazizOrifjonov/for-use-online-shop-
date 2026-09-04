@@ -1,4 +1,4 @@
-// Professional Tools Presentation — Apple 3D Scroll Reveal, Dynamic System Monitor & Liquid Animations
+// COMPUZ Presentation — Apple 3D Scroll Reveal, Dynamic System Monitor & Liquid Animations
 
 document.addEventListener('DOMContentLoaded', () => {
 

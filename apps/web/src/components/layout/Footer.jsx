@@ -63,7 +63,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-10 flex flex-col md:flex-row items-center justify-between border-t border-white/10 pt-6 text-[13px] gap-4">
-          <p>© {new Date().getFullYear()} Professional Tools. Barcha huquqlar himoyalangan.</p>
+          <p>© {new Date().getFullYear()} COMPUZ. Barcha huquqlar himoyalangan.</p>
           
           <div className="flex flex-wrap items-center justify-center gap-3">
             <div className="flex h-8 items-center justify-center rounded bg-[#0D1B2A] px-3 border border-[#1E3A5F]"><UzcardLogo /></div>

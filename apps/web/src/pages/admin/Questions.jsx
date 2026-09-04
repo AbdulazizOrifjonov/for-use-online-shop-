@@ -212,7 +212,7 @@ export default function AdminQuestions() {
               {/* Answer */}
               {q.answer && (
                 <div className="bg-primary/5 border border-primary/20 p-3 rounded-xl">
-                  <p className="text-xs font-bold text-primary mb-1">Professional Tools javobi:</p>
+                  <p className="text-xs font-bold text-primary mb-1">COMPUZ javobi:</p>
                   <p className="text-sm text-foreground">{q.answer}</p>
                 </div>
               )}
