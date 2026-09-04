@@ -4,16 +4,21 @@ import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard, Package, FolderTree, ShoppingBag, Users, Image, Tag, BarChart3,
   ArrowLeft, Crown, PanelLeftClose, PanelLeftOpen, Menu, X, Zap, Star, Aperture, HelpCircle,
+  Sun, Moon
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/layout/Logo';
 import { NotificationBell } from '@/components/admin/NotificationBell';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { useAuthStore } from '@/store/authStore';
+import { useUiStore } from '@/store/uiStore';
 import { api } from '@/lib/api';
+
 
 export default function AdminLayout() {
   const { t } = useTranslation();
   const user = useAuthStore((s) => s.user);
+  const { theme, toggleTheme } = useUiStore();
   const location = useLocation();
   const [adminCount, setAdminCount] = useState(0);
   const [collapsed, setCollapsed] = useState(false);
@@ -187,9 +192,17 @@ export default function AdminLayout() {
             </button>
             <span className="font-bold text-foreground dark:text-white">Admin Panel</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <LanguageSwitcher />
+            <button
+              onClick={toggleTheme}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/5 text-primary hover:bg-primary/10 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <NotificationBell />
-            <Link to="/" className="text-sm text-[#38B6FF] hover:text-foreground dark:text-white transition-colors hidden sm:block">Saytga qaytish</Link>
+            <Link to="/" className="text-sm text-[#38B6FF] hover:text-foreground dark:text-white transition-colors hidden sm:block ml-2">Saytga qaytish</Link>
           </div>
         </header>
         <main className="flex-1 overflow-x-hidden p-4 sm:p-6">
