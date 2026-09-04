@@ -3,7 +3,7 @@ import { Logo } from '@/components/layout/Logo';
 
 export default function AuthLayout() {
   return (
-    <div className="flex min-h-svh items-center justify-center bg-gradient-to-b from-secondary/60 to-background px-4 py-10">
+    <div className="flex min-h-svh items-center justify-center bg-gradient-to-b from-[#112238] to-[#070F1A] px-4 py-10">
       <div className="w-full max-w-md">
         <Link to="/" className="mb-8 flex items-center justify-center">
           <Logo size={42} />
