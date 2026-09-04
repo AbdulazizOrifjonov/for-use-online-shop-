@@ -16,7 +16,7 @@ export function CategoryQuickBar() {
   if (isLoading || categories.length === 0) return null;
 
   return (
-    <div className="hidden border-b border-[#1E3A5F]/60 bg-[#0D1B2A] lg:block">
+    <div className="hidden border-b border-border dark:border-[#1E3A5F]/60 bg-background dark:bg-[#0D1B2A] lg:block">
       <div className="mx-auto flex max-w-[1440px] items-center gap-1 overflow-x-auto px-6 scrollbar-hide">
         {categories.slice(0, 7).map((cat, i) => {
           const Icon = ICONS[i % ICONS.length];

@@ -45,7 +45,7 @@ export function Navbar({ onMenuClick }) {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-[#1E3A5F]/70 bg-[#0D1B2A]/95 shadow-lg backdrop-blur-xl pt-[env(safe-area-inset-top)] transition-colors duration-300">
+    <header className="sticky top-0 z-30 border-b border-border dark:border-[#1E3A5F]/70 bg-background dark:bg-[#0D1B2A]/95 shadow-lg backdrop-blur-xl pt-[env(safe-area-inset-top)] transition-colors duration-300">
       <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-2 px-3 sm:px-4 lg:px-6">
         <button
           className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/5 text-primary hover:bg-primary/10 active:scale-95 transition-all lg:hidden"
@@ -176,7 +176,7 @@ export function Navbar({ onMenuClick }) {
         </div>
       </div>
       {mobileSearchOpen && (
-        <div className="border-t border-[#1E3A5F] bg-[#0D1B2A] p-3 sm:hidden">
+        <div className="border-t border-border dark:border-[#1E3A5F] bg-background dark:bg-[#0D1B2A] p-3 sm:hidden">
           <SearchBox onNavigate={() => setMobileSearchOpen(false)} />
         </div>
       )}

@@ -25,6 +25,7 @@ import translateRoutes from './routes/translate.routes.js';
 import telegramRoutes from './routes/telegram.routes.js';
 import adminUserRoutes from './routes/admin-user.routes.js';
 import flashSaleRoutes from './routes/flash-sale.routes.js';
+import seedRoutes from './routes/seed.routes.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { getSitemap, getRobotsTxt } from './controllers/seo.controller.js';
 
@@ -85,6 +86,7 @@ app.use('/api/translate', translateRoutes);
 app.use('/api/auth', telegramRoutes);
 app.use('/api/admin-users', adminUserRoutes);
 app.use('/api/flash-sale', flashSaleRoutes);
+app.use('/api/seed', seedRoutes);
 
 // ─── Monolith: React frontend build'ini static fayl sifatida ulash ───
 const distDir = path.join(__dirname, '../../web/dist');

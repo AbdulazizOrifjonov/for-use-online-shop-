@@ -133,7 +133,7 @@ export const ProductCard = memo(function ProductCard({ product }) {
   return (
     <Link
       to={`/product/${product.slug}`}
-      className="group/card relative flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-[0_8px_30px_rgb(43,127,255,0.15)] hover:border-[#38B6FF]/40 hover:-translate-y-1"
+      className="group/card relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-[0_8px_30px_rgb(43,127,255,0.15)] hover:border-[#38B6FF]/40 hover:-translate-y-1"
       draggable={false}
       onDragStart={(e) => e.preventDefault()}
     >
