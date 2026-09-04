@@ -55,14 +55,14 @@ export function Navbar({ onMenuClick }) {
           <Menu className="h-5 w-5" />
         </button>
 
-        <Link to="/" className="flex shrink-0 items-center gap-2 font-bold text-lg sm:text-xl">
-          <Logo size={40} />
+        <Link to="/" className="flex shrink-0 items-center h-11">
+          <Logo className="h-full" />
         </Link>
 
         <button
           onClick={() => setCatalogOpen((v) => !v)}
           className={cn(
-            'hidden shrink-0 items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors lg:flex',
+            'hidden shrink-0 items-center gap-2 rounded-lg px-4 h-11 text-sm font-semibold transition-colors lg:flex',
             catalogOpen ? 'bg-primary text-primary-foreground' : 'bg-primary/10 text-primary hover:bg-primary/15'
           )}
         >
@@ -70,8 +70,8 @@ export function Navbar({ onMenuClick }) {
           {t('nav.categories')}
         </button>
 
-        <div className="mx-1 hidden flex-1 max-w-xl sm:block">
-          <SearchBox />
+        <div className="mx-1 hidden flex-1 max-w-xl h-11 sm:block">
+          <SearchBox className="h-full" />
         </div>
 
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">

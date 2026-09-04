@@ -88,7 +88,7 @@ export default function AdminLayout() {
           ) : (
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center gap-2 font-bold">
-                <Logo size={36} />
+                <Logo className="h-9" />
               </div>
               {isMobile ? (
                 <button

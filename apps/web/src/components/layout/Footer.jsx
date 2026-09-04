@@ -13,7 +13,7 @@ export function Footer() {
           {/* Column 1: Brand & Contact */}
           <div className="flex flex-col gap-4">
             <Link to="/" className="inline-block text-foreground dark:text-white">
-              <Logo size={40} />
+              <Logo className="h-10" />
             </Link>
             <p className="mt-2 text-[#9CA3AF] max-w-xs">
               Savollaringiz bo'lsa, javob berishga tayyormiz!

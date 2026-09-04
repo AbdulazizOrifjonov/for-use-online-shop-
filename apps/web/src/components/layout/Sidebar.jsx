@@ -83,7 +83,7 @@ export function Sidebar({ isOpen, onClose }) {
         )}
       >
         <div className="flex shrink-0 items-center justify-between border-b border-border/60 px-4 py-3.5">
-          <Logo size={36} />
+          <Logo className="h-9" />
           <button 
             onClick={onClose} 
             aria-label="close sidebar" 

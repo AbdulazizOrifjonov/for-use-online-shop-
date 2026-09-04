@@ -108,15 +108,15 @@ export function SearchBox({ className, onNavigate }) {
 
   return (
     <div ref={containerRef} className={cn('relative w-full', className)}>
-      <form onSubmit={handleSubmit}>
-        <div className="relative w-full">
+      <form onSubmit={handleSubmit} className="h-full">
+        <div className="relative w-full h-full">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setIsOpen(true)}
             placeholder={t('nav.search_placeholder')}
-            className="pl-9 pr-8"
+            className="pl-9 pr-8 h-full"
             autoComplete="off"
           />
           {query && (
