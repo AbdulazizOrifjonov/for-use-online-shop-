@@ -15,6 +15,9 @@ if (savedTheme) {
   } catch {
     // ignore malformed local storage value
   }
+} else {
+  // Default to dark mode matching the logo design
+  document.documentElement.classList.add('dark')
 }
 
 createRoot(document.getElementById('root')).render(

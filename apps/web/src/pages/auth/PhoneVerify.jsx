@@ -19,6 +19,7 @@ import { Input } from '@/components/ui/input';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/authStore';
 import { useCountdown } from '@/hooks/useCountdown';
+import { usePhoneMask } from '@/hooks/usePhoneMask';
 
 const STEPS = { PHONE: 'PHONE', WAITING: 'WAITING', OTP: 'OTP', CREATE_ACCOUNT: 'CREATE_ACCOUNT', SUCCESS: 'SUCCESS' };
 const BOT_USERNAME = import.meta.env.VITE_TELEGRAM_BOT_USERNAME || 'MarketProVerifyBot';
@@ -42,7 +43,7 @@ export default function PhoneVerify() {
   const setSession = useAuthStore((s) => s.setSession);
 
   const [step, setStep] = useState(STEPS.PHONE);
-  const [phone, setPhone] = useState('');
+  const phoneMask = usePhoneMask('+998');
   const [sessionId, setSessionId] = useState('');
   const [otp, setOtp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -68,15 +69,14 @@ export default function PhoneVerify() {
   }
 
   async function handleRequestVerification() {
-    const p = (phone || '').replace(/\D/g, '');
-    if (p.length !== 12) {
+    if (!phoneMask.isComplete) {
       setError("To'liq raqamni kiriting");
       return;
     }
     setError('');
     setIsLoading(true);
     try {
-      const { data } = await api.post('/auth/request-verification', { phone: `+${p}` });
+      const { data } = await api.post('/auth/request-verification', { phone: `+998${phoneMask.rawValue}` });
       setSessionId(data.sessionId);
       setStep(STEPS.WAITING);
       waitingTimer.reset(600);
@@ -146,7 +146,25 @@ export default function PhoneVerify() {
     stopPolling();
     setOtp('');
     setOtpError('');
-    await handleRequestVerification();
+    if (!phoneMask.isComplete) {
+      setError("To'liq raqamni kiriting");
+      return;
+    }
+    setError('');
+    setIsLoading(true);
+    try {
+      const { data } = await api.post('/auth/request-verification', { phone: `+998${phoneMask.rawValue}` });
+      setSessionId(data.sessionId);
+      setStep(STEPS.WAITING);
+      waitingTimer.reset(600);
+      resendTimer.reset(60);
+      setTelegramOpened(false);
+      startPolling(data.sessionId);
+    } catch (err) {
+      setError(err.friendlyMessage || "Xatolik yuz berdi");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function onCreateAccount(values) {
@@ -211,13 +229,8 @@ export default function PhoneVerify() {
               <Input
                 type="tel"
                 placeholder="+998 90 123 45 67"
-                value={phone}
-                onChange={(e) => {
-                  let val = e.target.value.replace(/[^\d+]/g, '');
-                  if (!val.startsWith('+')) val = '+' + val;
-                  if (val === '+') val = '+998';
-                  setPhone(val);
-                }}
+                value={phoneMask.value}
+                onChange={phoneMask.handleChange}
                 onKeyDown={(e) => e.key === 'Enter' && handleRequestVerification()}
                 className="h-12 pl-11 text-lg tracking-wider"
                 autoFocus
@@ -229,7 +242,7 @@ export default function PhoneVerify() {
           <Button
             className="w-full h-12 gap-2 text-base font-bold bg-primary hover:bg-primary/90"
             onClick={handleRequestVerification}
-            disabled={isLoading || phone.replace(/\D/g, '').length !== 12}
+            disabled={isLoading || !phoneMask.isComplete}
           >
             {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Tasdiqlash'}
             <ArrowRight className="h-5 w-5" />

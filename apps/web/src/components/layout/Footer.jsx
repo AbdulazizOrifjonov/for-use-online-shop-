@@ -6,7 +6,7 @@ import { UzcardLogo, HumoLogo, VisaLogo, MastercardLogo, ClickLogo, PaymeLogo } 
 
 export function Footer() {
   return (
-    <footer className="mt-auto bg-[#1C1E26] text-white/80">
+    <footer className="mt-auto bg-[#070F1A] text-white/80 border-t border-[#1E3A5F]/50">
       <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 text-sm">
           
@@ -66,12 +66,12 @@ export function Footer() {
           <p>© {new Date().getFullYear()} Professional Tools. Barcha huquqlar himoyalangan.</p>
           
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <div className="flex h-8 items-center justify-center rounded bg-[#282C3D] px-3 border border-white/5"><UzcardLogo /></div>
-            <div className="flex h-8 items-center justify-center rounded bg-[#282C3D] px-3 border border-white/5"><HumoLogo /></div>
-            <div className="flex h-8 items-center justify-center rounded bg-[#282C3D] px-3 border border-white/5"><VisaLogo /></div>
-            <div className="flex h-8 items-center justify-center rounded bg-[#282C3D] px-3 border border-white/5"><ClickLogo /></div>
-            <div className="flex h-8 items-center justify-center rounded bg-[#282C3D] px-3 border border-white/5"><PaymeLogo /></div>
-            <div className="flex h-8 items-center justify-center rounded bg-[#282C3D] px-3 border border-white/5"><MastercardLogo /></div>
+            <div className="flex h-8 items-center justify-center rounded bg-[#0D1B2A] px-3 border border-[#1E3A5F]"><UzcardLogo /></div>
+            <div className="flex h-8 items-center justify-center rounded bg-[#0D1B2A] px-3 border border-[#1E3A5F]"><HumoLogo /></div>
+            <div className="flex h-8 items-center justify-center rounded bg-[#0D1B2A] px-3 border border-[#1E3A5F]"><VisaLogo /></div>
+            <div className="flex h-8 items-center justify-center rounded bg-[#0D1B2A] px-3 border border-[#1E3A5F]"><ClickLogo /></div>
+            <div className="flex h-8 items-center justify-center rounded bg-[#0D1B2A] px-3 border border-[#1E3A5F]"><PaymeLogo /></div>
+            <div className="flex h-8 items-center justify-center rounded bg-[#0D1B2A] px-3 border border-[#1E3A5F]"><MastercardLogo /></div>
           </div>
 
           <div className="flex items-center gap-2">

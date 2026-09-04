@@ -158,7 +158,7 @@ export default function AdminLayout() {
       {/* Desktop sidebar */}
       <aside className={cn('hidden lg:block shrink-0 transition-all duration-500 ease-in-out', sidebarWidth)}>
         <div className={cn(
-          'fixed top-0 left-0 z-30 flex h-svh flex-col border-r border-border bg-[#0C4A6E] text-white transition-all duration-500 ease-in-out',
+          'fixed top-0 left-0 z-30 flex h-svh flex-col border-r border-[#1E3A5F] bg-[#070F1A] text-white transition-all duration-500 ease-in-out',
           sidebarWidth
         )}>
           <SidebarContent />
@@ -167,9 +167,9 @@ export default function AdminLayout() {
 
       {/* Mobile sidebar overlay */}
       <div className={cn("fixed inset-0 z-40 lg:hidden transition-opacity duration-500 ease-in-out", mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none")}>
-        <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
+        <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
         <div className={cn(
-          "absolute top-0 left-0 z-50 flex h-svh w-64 flex-col border-r border-border bg-[#0C4A6E] text-white shadow-xl transition-transform duration-500 ease-in-out",
+          "absolute top-0 left-0 z-50 flex h-svh w-64 flex-col border-r border-[#1E3A5F] bg-[#070F1A] text-white shadow-2xl transition-transform duration-500 ease-in-out",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}>
           <SidebarContent isMobile />
@@ -177,19 +177,19 @@ export default function AdminLayout() {
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border bg-card px-4">
+        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-[#1E3A5F] bg-[#0D1B2A] px-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setMobileOpen(true)}
-              className="rounded-lg p-1.5 text-muted-foreground hover:bg-accent lg:hidden"
+              className="rounded-lg p-1.5 text-muted-foreground hover:bg-[#1E3A5F]/50 lg:hidden"
             >
               <Menu className="h-5 w-5" />
             </button>
-            <span className="font-bold">Admin</span>
+            <span className="font-bold text-white">Admin Panel</span>
           </div>
           <div className="flex items-center gap-2">
             <NotificationBell />
-            <Link to="/" className="text-sm text-primary hidden sm:block">Saytga qaytish</Link>
+            <Link to="/" className="text-sm text-[#38B6FF] hover:text-white transition-colors hidden sm:block">Saytga qaytish</Link>
           </div>
         </header>
         <main className="flex-1 overflow-x-hidden p-4 sm:p-6">

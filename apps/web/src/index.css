@@ -3,29 +3,36 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --radius: 0.75rem;
+/* ============================================================
+   COMPUZ COLOR PALETTE  — matches dark navy + electric blue logo
+   Primary: #2B7FFF  |  Background: #0D1B2A  |  Card: #112238
+   ============================================================ */
 
-  --background: 0 0% 100%;
-  --foreground: 210 20% 10%;
+:root {
+  --radius: 0.625rem;
+
+  /* Light mode — clean blue-tinted whites */
+  --background: 214 40% 97%;
+  --foreground: 214 35% 10%;
 
   --card: 0 0% 100%;
-  --card-foreground: 210 20% 10%;
+  --card-foreground: 214 35% 10%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 210 20% 10%;
+  --popover-foreground: 214 35% 10%;
 
-  --primary: 200 98% 39%;
+  /* Electric blue from logo */
+  --primary: 217 100% 58%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 200 54% 95%;
-  --secondary-foreground: 200 98% 25%;
+  --secondary: 214 60% 93%;
+  --secondary-foreground: 217 80% 30%;
 
-  --muted: 210 7% 97%;
-  --muted-foreground: 220 9% 46%;
+  --muted: 214 30% 95%;
+  --muted-foreground: 214 15% 46%;
 
-  --accent: 200 54% 95%;
-  --accent-foreground: 200 98% 25%;
+  --accent: 204 100% 62%;
+  --accent-foreground: 0 0% 100%;
 
   --destructive: 0 72% 45%;
   --destructive-foreground: 0 0% 100%;
@@ -33,32 +40,38 @@
   --success: 142 76% 36%;
   --success-foreground: 0 0% 100%;
 
-  --border: 220 13% 91%;
-  --input: 220 13% 91%;
-  --ring: 200 98% 39%;
+  --border: 214 30% 88%;
+  --input: 214 30% 88%;
+  --ring: 217 100% 58%;
 }
 
 .dark {
-  --background: 210 20% 6%;
-  --foreground: 200 10% 96%;
+  /* Deep navy — logo background: #0D1B2A */
+  --background: 211 53% 11%;
+  --foreground: 214 44% 92%;
 
-  --card: 210 15% 10%;
-  --card-foreground: 200 10% 96%;
+  /* Card surface: #112238 */
+  --card: 213 54% 14%;
+  --card-foreground: 214 44% 92%;
 
-  --popover: 210 15% 10%;
-  --popover-foreground: 200 10% 96%;
+  --popover: 213 54% 14%;
+  --popover-foreground: 214 44% 92%;
 
-  --primary: 200 90% 48%;
+  /* Electric blue: #2B7FFF */
+  --primary: 217 100% 58%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 210 20% 14%;
-  --secondary-foreground: 200 10% 96%;
+  /* Slightly darker navy for secondary elements */
+  --secondary: 212 50% 18%;
+  --secondary-foreground: 214 44% 92%;
 
-  --muted: 210 15% 14%;
-  --muted-foreground: 200 10% 62%;
+  /* Muted navy: #0A1929 */
+  --muted: 211 55% 9%;
+  --muted-foreground: 214 25% 62%;
 
-  --accent: 210 20% 16%;
-  --accent-foreground: 200 10% 96%;
+  /* Accent: lighter electric blue #38B6FF */
+  --accent: 204 100% 61%;
+  --accent-foreground: 0 0% 100%;
 
   --destructive: 0 70% 50%;
   --destructive-foreground: 0 0% 100%;
@@ -66,9 +79,10 @@
   --success: 142 70% 45%;
   --success-foreground: 0 0% 100%;
 
-  --border: 210 15% 20%;
-  --input: 210 15% 20%;
-  --ring: 200 90% 48%;
+  /* Border: #1E3A5F */
+  --border: 213 51% 24%;
+  --input: 213 51% 24%;
+  --ring: 217 100% 58%;
 }
 
 @theme inline {
@@ -94,8 +108,12 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
 
-  --color-protools-dark: #075985;
-  --color-protools-deep: #0C4A6E;
+  /* Brand specific */
+  --color-compuz-navy: #0D1B2A;
+  --color-compuz-card: #112238;
+  --color-compuz-blue: #2B7FFF;
+  --color-compuz-accent: #38B6FF;
+  --color-compuz-silver: #E2EAF4;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
@@ -120,7 +138,7 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/20 dark:border-white/10;
+    @apply bg-white/70 dark:bg-[#0D1B2A]/80 backdrop-blur-xl border border-white/20 dark:border-[#1E3A5F]/60;
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -130,6 +148,14 @@
     scrollbar-width: none;
   }
 
+  /* Electric blue glow for interactive elements */
+  .blue-glow {
+    box-shadow: 0 0 20px rgba(43, 127, 255, 0.35);
+  }
+  .blue-glow-sm {
+    box-shadow: 0 0 10px rgba(43, 127, 255, 0.25);
+  }
+
   .skeleton-shimmer {
     position: relative;
     overflow: hidden;
@@ -137,7 +163,7 @@
       110deg,
       hsl(var(--muted)) 8%,
       hsl(var(--muted)) 18%,
-      color-mix(in srgb, hsl(var(--muted)) 50%, silver) 33%,
+      color-mix(in srgb, hsl(var(--muted)) 50%, #2B7FFF20) 33%,
       hsl(var(--muted)) 48%
     );
     background-size: 200% 100%;
@@ -166,7 +192,6 @@
     animation-play-state: paused;
   }
 }
-
 
 .hide-scrollbar::-webkit-scrollbar { display: none; } 
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
