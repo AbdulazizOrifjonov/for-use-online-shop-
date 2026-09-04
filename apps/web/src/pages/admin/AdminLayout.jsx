@@ -81,11 +81,11 @@ export default function AdminLayout() {
   function SidebarContent({ isMobile = false }) {
     return (
       <>
-        <div className="flex h-14 items-center border-b border-white/20 px-3">
+        <div className="flex h-14 items-center border-b border-border dark:border-white/20 px-3">
           {collapsed && !isMobile ? (
             <button
               onClick={() => setCollapsed(false)}
-              className="mx-auto cursor-pointer rounded-lg p-2 text-foreground dark:text-white/70 hover:bg-white/15"
+              className="mx-auto cursor-pointer rounded-lg p-2 text-foreground dark:text-white/70 hover:bg-foreground/5 dark:hover:bg-white/15"
               title="Sidebar ochish"
             >
               <PanelLeftOpen className="h-5 w-5" />
@@ -98,14 +98,14 @@ export default function AdminLayout() {
               {isMobile ? (
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="cursor-pointer rounded-lg p-1.5 text-foreground dark:text-white/70 hover:bg-white/15"
+                  className="cursor-pointer rounded-lg p-1.5 text-foreground dark:text-white/70 hover:bg-foreground/5 dark:hover:bg-white/15"
                 >
                   <X className="h-5 w-5" />
                 </button>
               ) : (
                 <button
                   onClick={() => setCollapsed(true)}
-                  className="cursor-pointer rounded-lg p-1.5 text-foreground dark:text-white/70 hover:bg-white/15"
+                  className="cursor-pointer rounded-lg p-1.5 text-foreground dark:text-white/70 hover:bg-foreground/5 dark:hover:bg-white/15"
                   title="Sidebar yopish"
                 >
                   <PanelLeftClose className="h-5 w-5" />
@@ -130,7 +130,7 @@ export default function AdminLayout() {
                     : 'gap-2.5 px-3 py-2',
                   isActive
                     ? 'bg-primary text-primary-foreground'
-                    : 'text-foreground dark:text-white/80 hover:bg-white/15'
+                    : 'text-foreground dark:text-white/80 hover:bg-foreground/5 dark:hover:bg-white/15'
                 )
               }
               title={collapsed && !isMobile ? label : undefined}
@@ -141,11 +141,11 @@ export default function AdminLayout() {
           ))}
         </nav>
 
-        <div className="border-t border-white/20 p-2">
+        <div className="border-t border-border dark:border-white/20 p-2">
           <Link
             to="/"
             className={cn(
-              'flex items-center rounded-lg text-sm font-medium text-foreground dark:text-white/80 hover:bg-white/15',
+              'flex items-center rounded-lg text-sm font-medium text-foreground dark:text-white/80 hover:bg-foreground/5 dark:hover:bg-white/15',
               collapsed && !isMobile ? 'justify-center p-2.5' : 'gap-2 px-3 py-2'
             )}
             title={collapsed && !isMobile ? 'Saytga qaytish' : undefined}
@@ -186,7 +186,7 @@ export default function AdminLayout() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setMobileOpen(true)}
-              className="rounded-lg p-1.5 text-muted-foreground hover:bg-[#1E3A5F]/50 lg:hidden"
+              className="rounded-lg p-1.5 text-muted-foreground hover:bg-foreground/5 dark:hover:bg-white/15 lg:hidden"
             >
               <Menu className="h-5 w-5" />
             </button>
